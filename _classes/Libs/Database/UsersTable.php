@@ -8,38 +8,56 @@ class UsersTable{
     }
     public $test = "helo";
 
-    //user register
-    public function userInsert($sureUserName,$sureUserEmail,$surePassword,$sureDateOfBirth,$sureGender){
+    public function insertClassPost($data){
         $database = $this->db;
-        $query= $database->prepare("INSERT INTO users_info (name,email,password,date_of_birth,gender,created_at) VALUES (:sureUserName,:sureUserEmail,:surePassword,:sureDateOfBirth,:sureGender,NOW())");
+        $query = $database->prepare("INSERT INTO  class_posts (image,description,category_id,teacher_id,class_date,class_time,created_at) VALUES (:image,:description,:category_id,:teacher_id,:class_date,:class_time,Now())");
 
-        $passwordHash = password_hash($surePassword,PASSWORD_DEFAULT); 
+        $result = $query->execute($data);
+        return $result;
+    }
 
-        $result = $query->execute([
-            "sureUserName" => $sureUserName,
-            "sureUserEmail" => $sureUserEmail,
-            "surePassword" => $passwordHash,
-            "sureDateOfBirth" => $sureDateOfBirth,
-            "sureGender" => $sureGender,
+    public function showClassPost(){
+        $database = $this->db;
+        $query = $database->prepare("SELECT * FROM class_posts ORDER BY id DESC");
+        $query->execute();
+        $data = $query->fetchAll();
+        return $data;
+    }  
+
+    public function showSingleData($id){
+        $database = $this->db;
+        $query = $database->prepare("SELECT * FROM class_posts WHERE (id=:id)");
+        $query->execute([
+            "id"=>$id,
         ]);
+        $result = $query->fetch();
 
         return $result;
     }
 
-    //user login check 
-    public function checkUserLogin($email,$password){
+    public function updateClassPostData($data){
         $database = $this->db;
-        $query = $database->prepare("SELECT * FROM users_info WHERE email=:email");
-        $query->execute([
-            "email"=>$email
-        ]);
-        $userData = $query->fetch();
-        if(password_verify($password,$userData->password)){
-            return $userData;
-        }else{
-            return false;
-        }
+        $query = $database->prepare("UPDATE   class_posts SET  image=:image,description=:description,category_id=:category_id,teacher_id=:teacher_id,class_date=:class_date,class_time=:class_time,update_at=Now() WHERE id=:id");
+
+        $result = $query->execute($data);
+        return $result;
     }
 
+    public function deleteClassPost($id){
+        $database = $this->db;
+        $query = $database->prepare("DELETE FROM class_posts WHERE id=:id");
+        $result = $query->execute([
+            "id" => $id,
+        ]);
+        return $result;
+    }
+    
+    public function indexPostDataShow(){
+        $database = $this->db;
+        $query = $database->prepare("SELECT * FROM class_posts ORDER BY id DESC LIMIT 3");
+        $query->execute();
+        $data = $query->fetchAll();
+        return $data;
+    }
 
 }

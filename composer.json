@@ -1,0 +1,13 @@
+{
+    "require": {
+        "fakerphp/faker": "^1.23"
+    },
+    "autoload":{
+        "psr-4":{
+            "Helper\\": "_classes/Helper",
+            "Libs\\": "_classes/Libs"
+        }
+    }
+}
+
+

@@ -13,7 +13,7 @@ class MySQL{
 
     public function __construct(
         $dbHost = "localhost",
-        $dbName = "facebook",
+        $dbName = "pratice_school_management_system",
         $dbUser = "root",
         $dbPassword = "",
     ){
