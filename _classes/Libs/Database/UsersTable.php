@@ -60,4 +60,62 @@ class UsersTable{
         return $data;
     }
 
+    // -------------------teacher post insert---------------
+    public function teacherPostInsert($data){
+        $database = $this->db;
+        $query = $database->prepare("INSERT INTO   teachers  (teacher_img,teacher_name,category_id,description,created_at) VALUES (:teacher_img,:teacher_name,:category_id,:description,Now())");
+
+        $result = $query->execute($data);
+        return $result;
+    }
+
+    public function showTeacherInfo(){
+        $database = $this->db;
+        $query = $database->prepare("SELECT * FROM teachers");
+        $query->execute();
+        $data = $query->fetchAll();
+        return $data;
+    }     
+
+    public function showTeacherSingleData($id){
+        $database = $this->db;
+        $query = $database->prepare("SELECT * FROM teachers WHERE (id=:id)");
+        $query->execute([
+            "id"=>$id,
+        ]);
+        $result = $query->fetch();
+
+        return $result;
+    }    
+
+    public function updateTeacherData($data){
+        $database = $this->db;
+        $query = $database->prepare("UPDATE   teachers SET  teacher_name=:teacher_name,teacher_img=:teacher_img,category_id=:category_id,description=:description,updated_at=Now() WHERE id=:id");
+
+        $result = $query->execute($data);
+        return $result;
+    }
+
+    public function deleteTeacher($id){
+        $database = $this->db;
+        $query = $database->prepare("DELETE FROM teachers WHERE id=:id");
+        $result = $query->execute([
+            "id" => $id,
+        ]);
+        return $result;
+    }
+
+    public function hideTeacher($id,$hide){
+        $database = $this->db;
+        $query = $database->prepare("UPDATE teachers SET hide=:hide,updated_at=Now() WHERE id=:id");
+        $result = $query->execute([
+            "id"=> $id,
+            "hide" => $hide,
+        ]);
+
+        return $result;
+    }
+    
+    
+
 }

@@ -92,36 +92,71 @@ list($dbminute, $dbhours, $ampm) = explode('/', $timeString);
     </style>
 </head>
 <body>
-    <!-- navbar section -->
-    <ul class="nav justify-content-center bg-primary text-light">
+<!-- navbar section -->
+<nav class="navbar navbar-expand-lg bg-body-tertiary bg-primary navbar-dark">
+  <div class="container">
+  <span class="navbar-brand"><span class="fs-5"><span class="text-warning fs-3">My</span>Technology</span></span>
+
+    <!-- responsive button -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <!-- responsive button -->
+
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <!-- ------------------------------------- -->
+        <li class="list-item dropdown">
+                    <a class="nav-link  text-light btn btn-dark m-2 dropdown-toggle" data-bs-toggle="dropdown" href="">Home</a>
+                    <div class="dropdown-menu">
+                        <a href="adminpanel.php" class="dropdown-item">Admin Panel</a>
+                        <a href="../index.php" class="dropdown-item">Home</a>
+                    </div>
+                </li> 
+        <!-- ------------------------------------- -->
+
+        <!-- ------------------------------------- -->
         <li class="nav-item dropdown">
-            <a class="nav-link  text-light btn btn-dark m-2 dropdown-toggle" data-bs-toggle="dropdown" href="">Home</a>
-            <div class="dropdown-menu">
-                <a href="" class="dropdown-item">Admin Panel</a>
-                <a href="../index.php" class="dropdown-item">Home</a>
-            </div>
-        </li> 
+                    <a class="nav-link text-light btn btn-warning m-2  dropdown-toggle" href="" data-bs-toggle="dropdown">Active Classes</a>
+                    <div class="dropdown-menu">
+                        <a href="createclasspost.php" class="dropdown-item">Create Classes</a>
+                        <a href="createclassinfo.php" class="dropdown-item">Classes Info</a>
+                    </div>
+                </li>        
+        <!-- ------------------------------------- -->
 
+
+        <!-- ------------------------------------- -->
         <li class="nav-item dropdown">
-            <a class="nav-link text-light btn btn-warning m-2  dropdown-toggle" href="" data-bs-toggle="dropdown">Active Classes</a>
-            <div class="dropdown-menu">
-                <a href="createclasspost.php" class="dropdown-item">Create Classes</a>
-                <a href="createclassinfo.php" class="dropdown-item">Classes Info</a>
-            </div>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link  text-light btn btn-info m-2" href="#">Teachers List</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link  text-light btn btn-secondary m-2" href="#">Time Table</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link  text-light btn btn-success m-2" href="#">Payment</a>
-        </li>
+                    <a class="nav-link  text-light btn btn-info m-2 dropdown-toggle" data-bs-toggle="dropdown" href="">Teachers List</a>
+                    <div class="dropdown-menu">
+                        <a href="teachers/teachers_create.php" class="dropdown-item">Insert teacher</a>
+                        <a href="teachers/teachers_info.php" class="dropdown-item">Teacher info</a>
+                    </div>
+                </li>
+
+        <!-- ------------------------------------- -->
 
 
-    </ul>
-    <!-- /navbar section -->
+        <!-- ------------------------------------- -->
+        <li class="nav-item">
+                    <a class="nav-link  text-light btn btn-secondary m-2" href="#">Time Table</a>
+                </li>        
+        <!-- ------------------------------------- -->
+
+
+        <!-- ------------------------------------- -->
+        <li class="nav-item">
+                    <a class="nav-link  text-light btn btn-success m-2" href="#">Payment</a>
+                </li>        
+        <!-- ------------------------------------- -->
+
+      </ul>
+    </div>
+  </div>
+</nav>
+<!-- navbar section -->
 
     <!-- create classes post form -->
     <div class="container" style="width:80%">

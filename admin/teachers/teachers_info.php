@@ -1,5 +1,5 @@
 <?php
-include("../_action/createclassinfodata.php");
+include("../../_action/teachers_data/teachers_create_data_info.php");
 // echo $random;
 ?>
 <!DOCTYPE html>
@@ -9,10 +9,10 @@ include("../_action/createclassinfodata.php");
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <!-- bs ccs link -->
-    <link rel="stylesheet" href="../bs/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../bs/css/bootstrap.min.css">
 
     <!-- bs js link -->
-    <script src="../bs/js/bootstrap.bundle.min.js" defer> </script>
+    <script src="../../bs/js/bootstrap.bundle.min.js" defer> </script>
 
     <!-- original css link -->
     <link rel="stylesheet" href="style.css">
@@ -42,8 +42,8 @@ include("../_action/createclassinfodata.php");
         <li class="list-item dropdown">
                     <a class="nav-link  text-light btn btn-dark m-2 dropdown-toggle" data-bs-toggle="dropdown" href="">Home</a>
                     <div class="dropdown-menu">
-                        <a href="adminpanel.php" class="dropdown-item">Admin Panel</a>
-                        <a href="../index.php" class="dropdown-item">Home</a>
+                        <a href="../adminpanel.php" class="dropdown-item">Admin Panel</a>
+                        <a href="../../index.php" class="dropdown-item">Home</a>
                     </div>
                 </li> 
         <!-- ------------------------------------- -->
@@ -52,8 +52,8 @@ include("../_action/createclassinfodata.php");
         <li class="nav-item dropdown">
                     <a class="nav-link text-light btn btn-warning m-2  dropdown-toggle" href="" data-bs-toggle="dropdown">Active Classes</a>
                     <div class="dropdown-menu">
-                        <a href="createclasspost.php" class="dropdown-item">Create Classes</a>
-                        <a href="createclassinfo.php" class="dropdown-item">Classes Info</a>
+                        <a href="../createclasspost.php" class="dropdown-item">Create Classes</a>
+                        <a href="../createclassinfo.php" class="dropdown-item">Classes Info</a>
                     </div>
                 </li>        
         <!-- ------------------------------------- -->
@@ -63,8 +63,8 @@ include("../_action/createclassinfodata.php");
         <li class="nav-item dropdown">
                     <a class="nav-link  text-light btn btn-info m-2 dropdown-toggle" data-bs-toggle="dropdown" href="">Teachers List</a>
                     <div class="dropdown-menu">
-                        <a href="teachers/teachers_create.php" class="dropdown-item">Insert teacher</a>
-                        <a href="teachers/teachers_info.php" class="dropdown-item">Teacher info</a>
+                        <a href="teachers_create.php" class="dropdown-item">Insert teacher</a>
+                        <a href="teachers_info.php" class="dropdown-item">Teacher info</a>
                     </div>
                 </li>
 
@@ -88,8 +88,27 @@ include("../_action/createclassinfodata.php");
     </div>
   </div>
 </nav>
-<!-- navbar section -->
-
+<!-- navbar section -->    
+    <!-- session section -->
+    <div class="container">
+        <?php if(isset($_SESSION["hide_success"])) : ?>
+            <div class="alert alert-success alert-dismissible fade show mt-1" role="alert">
+                <?= $_SESSION["hide_success"] ?>
+                <?php unset($_SESSION["hide_success"]) ?>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        <?php endif ?>
+    
+        <?php if(isset($_SESSION["hide_fail"])) : ?>
+            <div class="alert alert-danger alert-dismissible fade show mt-1" role="alert">
+                <?= $_SESSION["hide_fail"] ?>
+                <?php unset($_SESSION["hide_fail"]) ?>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        <?php endif ?>    
+    </div>
+    <!-- session section -->   
+        <h1 class="h4 text-center">Teachers Information</h1>
     <!-- session section -->
     <div class="container">
         <?php if(isset($_SESSION["insert_post"])) : ?>
@@ -110,20 +129,41 @@ include("../_action/createclassinfodata.php");
     </div>
     <!-- session section -->   
 
-<!-- showing class  post information -->
+
+
+
+<!-- showing   teacher information -->
+
 <div class="container" style="width:100%;"> 
     <div class="row">
         <?php foreach($data as $item) : ?>
         <div class="col-lg-4  p-2 col-md-6">
             <div class="border card p-1">
                 <div class="">
-                    <img src="../classPostPhotos/<?= $item->image?>" alt="" style="width:100%; height:200px;">
+                    <img src="../../teacherPhotos/<?= $item->teacher_img?>" alt="" style="width:100%; height:300px;">
                 </div>
-                <h1 class="h5 text-center my-1"><?= $item->category_id ?></h1>
+                <h1 class="h5 text-center my-2"><?= $item->teacher_name ?></h1>
                 <div class="card-footer">
-                    <a style="width:32%" href="adminclasspostedit.php?id=<?= $item->id?>&&rd=<?=$random?>" class="btn btn-primary">Edit</a>
-                    <a style="width:32%" href="../_action/adminclasspostdelete.php?id=<?= $item->id?>&&rd=<?=$random?>" class="btn btn-danger" onclick="return confirm('Are you Sure?')">Delete</a>
-                    <a style="width:32%" href="adminclasspostdetail.php?id=<?= $item->id?>&&rd=<?=$random?>" class="btn btn-secondary">Details</a>
+                    <a style="width:32%" href="teachers_edit.php?id=<?= $item->id?>&&rd=<?=$random?>" class="btn btn-primary">Edit</a>
+
+
+                    <a style="width:32%" href="../../_action/teachers_data/teachers_delete_data.php?id=<?= $item->id?>&&rd=<?=$random?>" class="btn btn-danger" onclick="return confirm('Are you Sure?')">Delete</a>
+
+
+                    <a style="width:32%" href="teachers_detail.php?id=<?= $item->id?>&&rd=<?=$random?>" class="btn btn-secondary">Details</a>
+
+                    <?php if($item->hide == 0) :?>
+                        <!-- to change one -->
+                    <div class="mt-1">
+                        <a href="../../_action/teachers_data/teachers_hide_data.php?id=<?= $item->id?>&&rd=<?=$random?>" class="btn btn-warning text-light" style="width:100%">Hide</a>
+                    </div>
+                    <?php else :?>
+                        <!-- to change zero -->
+                        <div class="mt-1">
+                        <a href="../../_action/teachers_data/teachers_show_data.php?id=<?= $item->id?>&&rd=<?=$random?>" class="btn btn-info text-light" style="width:100%">Show</a>
+                    </div>
+                    <?php endif ?>
+
                 </div>
             </div>
         </div>
@@ -132,6 +172,6 @@ include("../_action/createclassinfodata.php");
 
     </div>
 </div>
-<!-- /showing class post information -->
+<!-- /showing teacher information -->
 </body>        
 </html>
