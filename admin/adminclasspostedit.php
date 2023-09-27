@@ -1,7 +1,18 @@
 <?php
+// ----------- teachers table data -----------
 include("../vendor/autoload.php");
 use Libs\Database\MySQL;
 use Libs\Database\UsersTable;
+$database = new UsersTable(new MySQL);
+$teachers_data = $database->showTeacherInfo();
+// print_r($teachers_data);
+// ----------- teachers table data -----------
+?>
+
+<?php
+include("../vendor/autoload.php");
+// use Libs\Database\MySQL;
+// use Libs\Database\UsersTable;
 use Helper\HTTP;
 use Helper\Auth;
 
@@ -160,118 +171,130 @@ list($dbminute, $dbhours, $ampm) = explode('/', $timeString);
 
     <!-- create classes post form -->
     <div class="container" style="width:80%">
-        <h1 class="text-center h4 mt-2 mb-4">Edit a Class Section</h1>
 
-        <form action="../_action/createclassposteditdata.php" class="border p-3 rounded" method="post" enctype="multipart/form-data">
-            
-            <div class="my-2">
-                <input type="hidden" class="form-control" value="<?= $data->id ?>" name="id">
-            </div>
-            <div class="my-2">
-                <label for="image">Post image</label>
-                <input type="file" class="form-control" name="image" id="image" required value="<?= $data->image ?>">
-            </div>
-    
-            <div class="my-2">
-             <label for="class_category">Category</label>
-                <select name="class_category_id" class="form-control" id="class_category" required>
-                    <option <?php echo $data->category_id == 1 ? "selected" : "" ?> value="1">Java Course</option>
-                    <option <?php echo $data->category_id == 2 ? "selected" : "" ?> value="2">Computer Basic</option>
-                    <option <?php echo $data->category_id == 3 ? "selected" : "" ?> value="3">UI/UX Design</option>
-                    <option <?php echo $data->category_id == 4 ? "selected" : "" ?> value="4">programming Basic</option>
-                    <option <?php echo $data->category_id == 5 ? "selected" : "" ?> value="5">Networking</option>
-                    <option <?php echo $data->category_id == 6 ? "selected" : "" ?> value="6">Flutter Course</option>
-                    <option <?php echo $data->category_id == 7 ? "selected" : "" ?> value="7">React Course</option>
-                    <option <?php echo $data->category_id == 8 ? "selected" : "" ?> value="8">Professional Web Development</option>
-                </select>
-            </div>
-
-
-    
-            <div class="my-2">
-                <label for="description">Description</label>
-                <textarea name="description" id="description" rows="2" class="form-control" required><?= $data->description?></textarea>
-            </div>
-    
-            <div class="my-2">
-                <label for="teacher">Teacher</label>
-                <select name="teacher_id" class="form-control" id="teacher" required>
-                    <option <?php echo $data->teacher_id ==1 ? "selected" : "" ?> value="1">Alice</option>
-                    <option <?php echo $data->teacher_id ==2 ? "selected" : "" ?> value="2">Bob</option>
-                </select>
-            </div>
-
-            <div class="my-2">
-                <label for="">Class Date</label><br>
-                <!-- ---------- -->
-                    <select name="date" id="date">
-                        <?php for($i=1; $i<=31; $i++): ?>
-                            <option <?php echo $dbdate == $i ? "selected" : "" ?>  value="<?=$i?>"><?=$i?></option>
-                        <?php endfor ?>
-                    </select>
-                <!-- ---------- -->
-
-                <!-- ---------- -->
-                <select name="month" id="month">
-                <?php             $months = [
-                'January', 'February', 'March', 'April', 'May', 'June',
-                'July', 'August', 'September', 'October', 'November', 'December'
-                ];?>
-
-                <?php foreach($months as $month): ?>
-                    <option <?php echo $dbmonth == $month ? "selected" : "" ?>  value="<?=$month?>"><?=$month?></option>
-                    <?php endforeach ?>
-                </select>
-                <!-- ---------- -->
-
-                <!-- ---------- -->
-                <select name="year" id="year">
-                 <?php for($i=2000; $i<=date("Y"); $i++): ?>
-                    <option <?php echo $dbyear == $i ? "selected" : "" ?>  value="<?= $i?>"><?= $i?></option>
-                    <?php endfor ?>
-                    </select>
-                <!-- ---------- -->
-            </div>
-
-            <div class="my-2">
-                <label for="">Class Time</label><br>
-                <!-- ---------- -->
-                <select name="minute" id="minute">
-                    <?php for($i=00; $i<=60; $i++): ?>
-                        <option <?php echo $dbminute ==$i ? "selected" : "" ?> value="<?=$i?>"><?=$i . " minutes "?></option>
-                        <?php endfor ?>
-                    </select>
-                <!-- ---------- -->
-
-                <!-- ---------- -->
-                <select name="hour" id="hour">
-                <?php for($i=00; $i<=12; $i++): ?>
-                        <option <?php echo $dbhours ==$i ? "selected" : "" ?> value="<?=$i?>"><?=$i . " hours"?></option>
-                        <?php endfor ?>
-                    </select>
-                <!-- ---------- -->
-
-                <!-- ---------- -->
-                <select name="d_n" id="year">
-                    <option <?php echo $ampm =="am" ? "selected" : "" ?> value="am">AM</option>
-                    <option <?php echo $ampm =="pm" ? "selected" : "" ?> value="pm">PM</option>
-                    </select>
-                <!-- ---------- -->
-            </div>
-
-
-            <div class="my-2">
-                <input type="radio" style="opacity:0"></input>
-                <div class="float-end">
-                    <button type="reset" class="btn btn-danger ms-2">Reset</button>
+        <div class="card mt-3">
+            <div class="card-header bg-primary text-light h5"> Edit Class Form</div>
+             <div class="card-body">
+            <form action="../_action/createclassposteditdata.php" class="" method="post" enctype="multipart/form-data">
+                
+                <div class="my-2">
+                    <input type="hidden" class="form-control" value="<?= $data->id ?>" name="id">
                 </div>
-                    <div class="float-end">
-                        <button type="create" class="btn btn-success ms-2">Edit</button>
-                    </div>
-            </div>
     
-
-        </form>
+                <div class="my-2">
+                    <label for="image">Post image</label>
+                    <input type="file" class="form-control" name="image" id="image" required value="<?= $data->image ?>">
+                </div>
+        
+                <div class="my-2">
+                 <label for="class_category">Category</label>
+                    <select name="class_category_id" class="form-control" id="class_category" required>
+                        <option <?php echo $data->category_id == 1 ? "selected" : "" ?> value="1">Java Course</option>
+                        <option <?php echo $data->category_id == 2 ? "selected" : "" ?> value="2">Computer Basic</option>
+                        <option <?php echo $data->category_id == 3 ? "selected" : "" ?> value="3">UI/UX Design</option>
+                        <option <?php echo $data->category_id == 4 ? "selected" : "" ?> value="4">programming Basic</option>
+                        <option <?php echo $data->category_id == 5 ? "selected" : "" ?> value="5">Networking</option>
+                        <option <?php echo $data->category_id == 6 ? "selected" : "" ?> value="6">Flutter Course</option>
+                        <option <?php echo $data->category_id == 7 ? "selected" : "" ?> value="7">React Course</option>
+                        <option <?php echo $data->category_id == 8 ? "selected" : "" ?> value="8">Professional Web Development</option>
+                    </select>
+                </div>
+    
+    
+        
+                <div class="my-2">
+                    <label for="description">Description</label>
+                    <textarea name="description" id="description" rows="2" class="form-control" required><?= $data->description?></textarea>
+                </div>
+        
+    
+    
+                <div class="my-2">
+                    <label for="teacher">Teacher</label>
+                    <select name="teacher_id" class="form-control" id="teacher" required>
+                        <?php foreach($teachers_data as $item): ?>
+                        <option <?php echo $data->teacher_id ==  $item->id ? "selected" : "" ?> value="<?= $item->id?>">  
+                        <?= $item->teacher_name?>
+                        (<span class="float-end"><?= $item->category_id ?></span>)
+                        </option>
+                        <?php endforeach ?>
+                    </select>
+                </div>
+    
+    
+                <div class="my-2">
+                    <label for="">Class Date</label><br>
+                    <!-- ---------- -->
+                        <select name="date" id="date">
+                            <?php for($i=1; $i<=31; $i++): ?>
+                                <option <?php echo $dbdate == $i ? "selected" : "" ?>  value="<?=$i?>"><?=$i?></option>
+                            <?php endfor ?>
+                        </select>
+                    <!-- ---------- -->
+    
+                    <!-- ---------- -->
+                    <select name="month" id="month">
+                    <?php             $months = [
+                    'January', 'February', 'March', 'April', 'May', 'June',
+                    'July', 'August', 'September', 'October', 'November', 'December'
+                    ];?>
+    
+                    <?php foreach($months as $month): ?>
+                        <option <?php echo $dbmonth == $month ? "selected" : "" ?>  value="<?=$month?>"><?=$month?></option>
+                        <?php endforeach ?>
+                    </select>
+                    <!-- ---------- -->
+    
+                    <!-- ---------- -->
+                    <select name="year" id="year">
+                     <?php for($i=2000; $i<=date("Y"); $i++): ?>
+                        <option <?php echo $dbyear == $i ? "selected" : "" ?>  value="<?= $i?>"><?= $i?></option>
+                        <?php endfor ?>
+                        </select>
+                    <!-- ---------- -->
+                </div>
+    
+                <div class="my-2">
+                    <label for="">Class Time</label><br>
+                    <!-- ---------- -->
+                    <select name="minute" id="minute">
+                        <?php for($i=00; $i<=60; $i++): ?>
+                            <option <?php echo $dbminute ==$i ? "selected" : "" ?> value="<?=$i?>"><?=$i . " minutes "?></option>
+                            <?php endfor ?>
+                        </select>
+                    <!-- ---------- -->
+    
+                    <!-- ---------- -->
+                    <select name="hour" id="hour">
+                    <?php for($i=00; $i<=12; $i++): ?>
+                            <option <?php echo $dbhours ==$i ? "selected" : "" ?> value="<?=$i?>"><?=$i . " hours"?></option>
+                            <?php endfor ?>
+                        </select>
+                    <!-- ---------- -->
+    
+                    <!-- ---------- -->
+                    <select name="d_n" id="year">
+                        <option <?php echo $ampm =="am" ? "selected" : "" ?> value="am">AM</option>
+                        <option <?php echo $ampm =="pm" ? "selected" : "" ?> value="pm">PM</option>
+                        </select>
+                    <!-- ---------- -->
+                </div>
+    
+    
+                <div class="my-2">
+                    <input type="radio" style="opacity:0"></input>
+                    <div class="float-end">
+                        <button type="reset" class="btn btn-danger ms-2">Reset</button>
+                    </div>
+                        <div class="float-end">
+                            <button type="create" class="btn btn-success ms-2">Edit</button>
+                        </div>
+                </div>
+        
+    
+            </form>
+            </div>
+        </div>
 
     </div>
         <!-- /create classes post form -->
@@ -279,3 +302,4 @@ list($dbminute, $dbhours, $ampm) = explode('/', $timeString);
 
 </body>
 </html>
+

@@ -91,9 +91,7 @@
 </nav>
 <!-- navbar section -->
 
-    <div class="container">
-        <h1 class="text-center h4">Teacher Insertion</h1>
-
+    <div class="container" style="width:80%">
     <!-- session section -->
     <?php if(isset($_SESSION["teacher_success"])) : ?>
     <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -113,46 +111,52 @@
     <!-- session section -->         
 
         <!-- teacher insert form -->
-        <form action="../../_action/teachers_data/teachers_create_data.php" method="post" class="border p-3 rounded" enctype="multipart/form-data">
-            <div class="my-3">
-                <label for="teacher_image">Teacher Image</label>
-                <input type="file" class="form-control" id="teacher_image" name="teacher_image" required>
-            </div>
-
-            <div class="my-3">
-                <label for="teacher">Teacher</label>
-                <input type="text" class="form-control" placeholder="Teacher" id="teacher" required name="teacher_name">
-            </div>
-
-            <div class="my-3">
-             <label for="class_category">Category</label>
-                <select name="category_id" class="form-control" id="class_category" required>
-                    <option value="1">Computer Basic</option>
-                    <option value="2">Java Course</option>
-                    <option value="3">UI/UX Design</option>
-                    <option value="4">programming Basic</option>
-                    <option value="5">Networking</option>
-                    <option value="6">Flutter Course</option>
-                    <option value="7">React Course</option>
-                    <option value="8">Professional Web Development</option>
-                </select>
-            </div>
-
-            <div class="my-3">
-                <label for="description">Description</label>
-                <textarea  id="description"  rows="4" name="teacher_description" class="form-control"></textarea> 
-            </div>
-
-            <div class="my-3">
-                <input type="radio" style="opacity:0;"></input>
-                <div class="float-end">
-                    <button type="reset" class="btn btn-danger ms-2">Reset</button>
+        <div class="card mt-3">
+        <div class="card-header bg-primary text-light h5"> Add Teachers Form</div>
+        <div class="card-body">
+            <form action="../../_action/teachers_data/teachers_create_data.php" method="post"  enctype="multipart/form-data">
+                <div class="my-3">
+                    <label for="teacher_image">Teacher Image</label>
+                    <input type="file" class="form-control" id="teacher_image" name="teacher_image" required>
                 </div>
+    
+                <div class="my-3">
+                    <label for="teacher">Teacher</label>
+                    <input type="text" class="form-control" placeholder="Teacher" id="teacher" required name="teacher_name">
+                </div>
+    
+                <div class="my-3">
+                 <label for="class_category">Category</label>
+                    <select name="category_id" class="form-control" id="class_category" required>
+                        <option value="1">Computer Basic</option>
+                        <option value="2">Java Course</option>
+                        <option value="3">UI/UX Design</option>
+                        <option value="4">programming Basic</option>
+                        <option value="5">Networking</option>
+                        <option value="6">Flutter Course</option>
+                        <option value="7">React Course</option>
+                        <option value="8">Professional Web Development</option>
+                    </select>
+                </div>
+    
+                <div class="my-3">
+                    <label for="description">Description</label>
+                    <textarea  id="description"  rows="4" name="teacher_description" class="form-control"></textarea> 
+                </div>
+    
+                <div class="my-3">
+                    <input type="radio" style="opacity:0;"></input>
                     <div class="float-end">
-                        <button type="submit" class="btn btn-success ms-2">Create</button>
+                        <button type="reset" class="btn btn-danger ms-2">Reset</button>
                     </div>
-            </div>
-        </form>
+                        <div class="float-end">
+                            <button type="submit" class="btn btn-success ms-2">Create</button>
+                        </div>
+                </div>
+            </form>
+
+        </div>
+        </div>
         <!-- /teacher insert form -->
     </div>
 </body>

@@ -12,9 +12,9 @@ if($_GET["rd"] != $_SESSION["checkRandomNumber"]){
 
 $database = new UsersTable(new MySQL());
 $id = $_GET["id"];
-$data = $database->showSingleData($id);
+$data = $database->joinClassPostsAndTeachersDetailShow($id);
 //---------------- time management ----------
-$timeString = $data->class_time;
+$timeString = $data[0]->class_time;
 
 // Split the time string into its components
 list($dbminute, $dbhours, $ampm) = explode('/', $timeString);
@@ -101,18 +101,18 @@ list($dbminute, $dbhours, $ampm) = explode('/', $timeString);
     <div class="container mt-2">
         <ul class="list-group">
             <li class="list-group-item">
-                <img src="classPostPhotos/<?= $data->image ?>" alt="">
+                <img src="classPostPhotos/<?= $data[0]->image ?>" alt="">
             </li>
             <li class="list-group-item">
-                <h1 class="h5 text-center"><?= $data->category_id ?></h1>
+                <h1 class="h5 text-center"><?= $data[0]->category_id ?></h1>
             </li>
-            <li class="list-group-item"><?= $data->description ?></li>
+            <li class="list-group-item"><?= $data[0]->description ?></li>
             <li class="list-group-item">
                 Teacher : 
-                <?= $data->teacher_id ?>
+                <?= $data[0]->t_name ?>
             </li>
             <li class="list-group-item">
-                Class Start : <?= $data->class_date ?>
+                Class Start : <?= $data[0]->class_date ?>
             </li>
             <li class="list-group-item">
                 Class Time : <?= $dbhours . " hours - " . $dbminute . " minute - " . $ampm ?>

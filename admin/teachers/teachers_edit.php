@@ -132,51 +132,55 @@ $data = $database->showTeacherSingleData($id);
 
 
 <!-- teacher edit form -->
-<div class="container">
-    <h1 class="h4 text-center my-2">Teachers Edit Form</h1>
-    <form action="../../_action/teachers_data/teachers_post_update_data.php" method="post" class="border p-3 rounded" enctype="multipart/form-data">
-        <div class="my-2">
-            <input type="hidden" value="<?= $data->id ?>"  name="id" class="form-control">
-        </div>
-                <div class="my-3">
-                    <label for="teacher_image">Teacher Image</label>
-                    <input type="file" class="form-control" id="teacher_image" name="teacher_image" required>
-                </div>
-    
-                <div class="my-3">
-                    <label for="teacher">Teacher</label>
-                    <input type="text" class="form-control" placeholder="Teacher" id="teacher" required name="teacher_name" value="<?= $data->teacher_name ?>">
-                </div>
-    
-                <div class="my-3">
-                 <label for="class_category">Category</label>
-                    <select name="category_id" class="form-control" id="class_category" required>
-                        <option <?php echo $data->category_id == 1 ? "selected" : "" ?> value="1">Computer Basic</option>
-                        <option <?php echo $data->category_id == 2 ? "selected" : "" ?> value="2">Java Course</option>
-                        <option <?php echo $data->category_id == 3 ? "selected" : "" ?> value="3">UI/UX Design</option>
-                        <option <?php echo $data->category_id == 4 ? "selected" : "" ?> value="4">programming Basic</option>
-                        <option <?php echo $data->category_id == 5 ? "selected" : "" ?> value="5">Networking</option>
-                        <option <?php echo $data->category_id == 6 ? "selected" : "" ?> value="6">Flutter Course</option>
-                        <option <?php echo $data->category_id == 7 ? "selected" : "" ?> value="7">React Course</option>
-                        <option <?php echo $data->category_id == 8 ? "selected" : "" ?> value="8">Professional Web Development</option>
-                    </select>
-                </div>
-    
-                <div class="my-3">
-                    <label for="description">Description</label>
-                    <textarea  id="description"  rows="4" name="teacher_description" class="form-control"><?= $data->description ?></textarea> 
-                </div>
-    
-                <div class="my-3">
-                    <input type="radio" style="opacity:0;"></input>
-                    <div class="float-end">
-                        <button type="reset" class="btn btn-danger ms-2">Reset</button>
+<div class="container" style="width:80%">
+    <div class="card mt-3">
+    <div class="card-header bg-primary text-light h5"> Edit Teachers Form</div>
+    <div class="card-body">
+        <form action="../../_action/teachers_data/teachers_post_update_data.php" method="post"  enctype="multipart/form-data">
+            <div class="my-2">
+                <input type="hidden" value="<?= $data->id ?>"  name="id" class="form-control">
+            </div>
+                    <div class="my-3">
+                        <label for="teacher_image">Teacher Image</label>
+                        <input type="file" class="form-control" id="teacher_image" name="teacher_image" required>
                     </div>
+        
+                    <div class="my-3">
+                        <label for="teacher">Teacher</label>
+                        <input type="text" class="form-control" placeholder="Teacher" id="teacher" required name="teacher_name" value="<?= $data->teacher_name ?>">
+                    </div>
+        
+                    <div class="my-3">
+                     <label for="class_category">Category</label>
+                        <select name="category_id" class="form-control" id="class_category" required>
+                            <option <?php echo $data->category_id == 1 ? "selected" : "" ?> value="1">Computer Basic</option>
+                            <option <?php echo $data->category_id == 2 ? "selected" : "" ?> value="2">Java Course</option>
+                            <option <?php echo $data->category_id == 3 ? "selected" : "" ?> value="3">UI/UX Design</option>
+                            <option <?php echo $data->category_id == 4 ? "selected" : "" ?> value="4">programming Basic</option>
+                            <option <?php echo $data->category_id == 5 ? "selected" : "" ?> value="5">Networking</option>
+                            <option <?php echo $data->category_id == 6 ? "selected" : "" ?> value="6">Flutter Course</option>
+                            <option <?php echo $data->category_id == 7 ? "selected" : "" ?> value="7">React Course</option>
+                            <option <?php echo $data->category_id == 8 ? "selected" : "" ?> value="8">Professional Web Development</option>
+                        </select>
+                    </div>
+        
+                    <div class="my-3">
+                        <label for="description">Description</label>
+                        <textarea  id="description"  rows="4" name="teacher_description" class="form-control"><?= $data->description ?></textarea> 
+                    </div>
+        
+                    <div class="my-3">
+                        <input type="radio" style="opacity:0;"></input>
                         <div class="float-end">
-                            <button type="submit" class="btn btn-success ms-2">Create</button>
+                            <button type="reset" class="btn btn-danger ms-2">Reset</button>
                         </div>
-                </div>
-            </form>
+                            <div class="float-end">
+                                <button type="submit" class="btn btn-success ms-2">Create</button>
+                            </div>
+                    </div>
+        </form>
+    </div>
+    </div>
 </div>
 <!-- teacher edit form -->
 

@@ -115,7 +115,19 @@ class UsersTable{
 
         return $result;
     }
-    
+
+    // table join class_posts table and teachers table
+
+    function joinClassPostsAndTeachersDetailShow($id){
+        $database = $this->db;
+        $query = $database->prepare("SELECT class_posts.*,teachers.id As t_id,teachers.teacher_name As t_name,teachers.hide As t_hide  FROM class_posts  LEFT JOIN teachers ON class_posts.teacher_id = teachers.id WHERE class_posts.id=:id");
+        $query->execute([
+            "id"=>$id
+        ]);
+        return $query->fetchAll();
+    }
+
+
     
 
 }
