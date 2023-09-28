@@ -2,11 +2,12 @@
 include("vendor/autoload.php");
 use Libs\Database\MySQL;
 use Libs\Database\UsersTable;
+use Libs\Database\UsersAnotherTable;
 use Helper\HTTP;
 use Helper\Auth;
 
-$database = new UsersTable(new MySQL);
-$data = $database->indexPostDataShow();
+$database = new UsersAnotherTable(new MySQL);
+$data = $database->joinClassPostsAndCoursesLimit();
 session_start();
 // echo Auth::randomNumber();
 ?>
@@ -34,11 +35,11 @@ session_start();
         }
     </style>
 </head>
-<body style="font-family: Arial, sans-serif;background-color: #f0f0f0;margin: 0;padding: 0;">
+<body>
 
 
     <!-- navbar section -->
-    <nav class="navbar navbar-dark bg-primary">
+   <nav class="navbar navbar-dark bg-primary">
     <div class="container">
 
     <a href="" class="navbar-brand"><span class="fs-5"><span class="text-warning fs-3">My</span>Technology</span></a>
@@ -59,16 +60,16 @@ session_start();
 
       <div class="offcanvas-body">
         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-          <li class="nav-item">
+          <li class="nav-item my-1">
             <a href="teachers/teachers_info.php" class="nav-link active btn btn-light text-dark"> Teachers </a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item my-1">
+          <a href="courses/course_info.php" class="nav-link active btn btn-light text-dark"> Courses And Fee </a>
+          </li>
+          <li class="nav-item my-1">
             <a href="" class="nav-link active">action</a>
           </li>
-          <li class="nav-item">
-            <a href="" class="nav-link active">action</a>
-          </li>
-          <li class="nav-item">
+          <li class="nav-item my-1">
             <a href="admin/adminpanel.php" class="nav-link active btn btn-danger">Admin</a>
           </li>
         </ul>
@@ -77,7 +78,6 @@ session_start();
     </div>
   </div>
 </nav>
-
     <!-- navbar section -->
 
     <!-- view section -->
@@ -120,7 +120,7 @@ session_start();
                     <?php if(file_exists("classPostPhotos/$item->image")): ?>
                     <img src="classPostPhotos/<?= $item->image ?>" alt="" style="width:100%; height:200px;">
                     <?php endif ?>
-                    <h1 class="h5 text-center my-1"><?= $item->category_id ?></h1>
+                    <h1 class="h5 text-center my-1"><?= $item->c_course ?></h1>
                 </div>
 
                 <div class="card-footer">

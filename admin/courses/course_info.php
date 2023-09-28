@@ -1,14 +1,11 @@
 <?php
-// ----------- course table data -----------
-include("../../vendor/autoload.php");
-use Libs\Database\MySQL;
-use Libs\Database\UsersAnotherTable;
-$database = new UsersAnotherTable(new MySQL);
-$dataCourse = $database->takeCourse();
+include("../../_action/courses_data/course_info_data.php");
+$data = $result;
 
-// ----------- course table data -----------
+use Helper\Auth;
+session_start();
+ $rd = Auth::randomNumber();
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,12 +29,26 @@ $dataCourse = $database->takeCourse();
         form{
             background-color: #fff;
         }
-    </style>
+        #container-width{
+          width:80%;
+        }
+        @media(max-width:900px){
+          #container-width{
+            width:100%;
+          }
+        }
+
+        @media(max-width:500px){
+         #btn-style{
+          margin-top:2px;
+          width:100%;
+         }
+        }
+    </style>    
 </head>
 <body>
-    <?php session_start() ?>
-<!-- navbar section -->
-<nav class="navbar navbar-expand-lg bg-body-tertiary bg-primary navbar-dark">
+ <!-- navbar section -->
+ <nav class="navbar navbar-expand-lg bg-body-tertiary bg-primary navbar-dark">
   <div class="container">
   <span class="navbar-brand"><span class="fs-5"><span class="text-warning fs-3">My</span>Technology</span></span>
 
@@ -75,8 +86,8 @@ $dataCourse = $database->takeCourse();
         <li class="nav-item dropdown">
                     <a class="nav-link  text-light btn btn-info m-2 dropdown-toggle" data-bs-toggle="dropdown" href="">Teachers List</a>
                     <div class="dropdown-menu">
-                        <a href="" class="dropdown-item">Insert teacher</a>
-                        <a href="teachers_info.php" class="dropdown-item">Teacher info</a>
+                        <a href="../teachers/teachers_create.php" class="dropdown-item">Insert teacher</a>
+                        <a href="../teachers/teachers_info.php" class="dropdown-item">Teacher info</a>
                     </div>
                 </li>
 
@@ -106,68 +117,58 @@ $dataCourse = $database->takeCourse();
 </nav>
 <!-- navbar section -->
 
-    <div class="container" style="width:80%">
-    <!-- session section -->
-    <?php if(isset($_SESSION["teacher_success"])) : ?>
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-        <?= $_SESSION["teacher_success"] ?>
-        <?php unset($_SESSION["teacher_success"]) ?>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-    <?php endif ?>
 
-    <?php if(isset($_SESSION["teacher_fail"])) : ?>
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        <?= $_SESSION["teacher_fail"] ?>
-        <?php unset($_SESSION["teacher_fail"]) ?>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-    <?php endif ?>    
-    <!-- session section -->         
+<!-- course create form -->
+<div class="container" id="container-width">
+  
+  <!-- session section -->
+  <?php if(isset($_SESSION["course_edit"])) : ?>
+  <div class="alert alert-success alert-dismissible fade show mt-2" role="alert">
+      <?= $_SESSION["course_edit"] ?>
+      <?php unset($_SESSION["course_edit"]) ?>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+  <?php endif ?>
+  
+  <?php if(isset($_SESSION["course_edit_fail"])) : ?>
+  <div class="alert alert-danger alert-dismissible fade show mt-2" role="alert">
+      <?= $_SESSION["course_edit_fail"] ?>
+      <?php unset($_SESSION["course_edit_fail"]) ?>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+  <?php endif ?>    
+  <!-- session section -->
 
-        <!-- teacher insert form -->
-        <div class="card mt-3">
-        <div class="card-header bg-primary text-light h5"> Add Teachers Form</div>
+    <div class="card mt-3">
+    <div class="card-header bg-primary text-light h5 text-center">Courses</div>
         <div class="card-body">
-            <form action="../../_action/teachers_data/teachers_create_data.php" method="post"  enctype="multipart/form-data">
-                <div class="my-3">
-                    <label for="teacher_image">Teacher Image</label>
-                    <input type="file" class="form-control" id="teacher_image" name="teacher_image" required>
-                </div>
-    
-                <div class="my-3">
-                    <label for="teacher">Teacher</label>
-                    <input type="text" class="form-control" placeholder="Teacher" id="teacher" required name="teacher_name">
-                </div>
-    
-                <div class="my-2">
-                 <label for="class_category">Category</label>
-                    <select name="class_category_id" class="form-control" id="class_category" required>
-                        <?php foreach($dataCourse as $item) : ?>
-                            <option value="<?= $item->id ?>"><?= $item->course?></option>
-                            <?php endforeach ?>
-                    </select>
-                </div>
-    
-                <div class="my-3">
-                    <label for="description">Description</label>
-                    <textarea  id="description"  rows="4" name="teacher_description" class="form-control"></textarea> 
-                </div>
-    
-                <div class="my-3">
-                    <input type="radio" style="opacity:0;"></input>
-                    <div class="float-end">
-                        <button type="reset" class="btn btn-danger ms-2">Reset</button>
-                    </div>
-                        <div class="float-end">
-                            <button type="submit" class="btn btn-success ms-2">Create</button>
-                        </div>
-                </div>
-            </form>
+          <table class="table table-striped table-bordered table-hover ">
+            <tr>
+              <th>Courses</th>
+              <th>Fee</th>
+              <th>Action</th>
+            </tr>
+            <?php foreach($data as $item) : ?>
+            <tr>
+              <th><?= $item->course ?></th>
+              <th><?= $item->fee ?></th>
+              <th>
+                <a href="course_edit.php?id=<?= $item->id?>&&rd=<?=$rd?>" class="btn btn-primary" id="btn-style">Edit</a>
 
+                <?php if($item->hide == 0) : ?>
+                <!-- hide -> 1 -->
+                <a href="../../_action/courses_data/course_hide_data.php?id=<?= $item->id?>&&rd=<?=$rd?>" class="btn btn-warning" id="btn-style">Hide</a>
+                <?php elseif($item->hide == 1) : ?>
+                <!-- show -> 0 -->
+                <a href="../../_action/courses_data/course_show_data.php?id=<?= $item->id?>&&rd=<?=$rd?>" class="btn btn-success" id="btn-style">Show</a>
+                <?php endif ?>
+              </th>
+            </tr>
+            <?php endforeach ?>
+          </table>
         </div>
-        </div>
-        <!-- /teacher insert form -->
     </div>
+</div>
+<!-- course create form -->
 </body>
 </html>

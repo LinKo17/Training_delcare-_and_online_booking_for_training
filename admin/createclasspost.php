@@ -8,6 +8,20 @@ $data = $database->showTeacherInfo();
 // print_r($data);
 // ----------- teachers table data -----------
 ?>
+
+<?php
+// ----------- course table data -----------
+use Libs\Database\UsersAnotherTable;
+$database = new UsersAnotherTable(new MySQL);
+$dataCourse = $database->takeCourse();
+
+// ----------- course table data -----------
+?>
+<?php
+// join teacher table and course table
+$dataTeacherAndCourse = $database->joinTeachersAndCoursesAll();
+// join teacher table and course table
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,8 +34,7 @@ $data = $database->showTeacherInfo();
     <!-- bs js link -->
     <script src="../bs/js/bootstrap.bundle.min.js" defer> </script>
 
-    <!-- original css link -->
-    <link rel="stylesheet" href="style.css">
+
     
     <style>
         body {
@@ -104,8 +117,12 @@ $data = $database->showTeacherInfo();
 
 
         <!-- ------------------------------------- -->
-        <li class="nav-item">
-                    <a class="nav-link  text-light btn btn-secondary m-2" href="#">Time Table</a>
+        <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-light btn btn-secondary m-2" href="#" data-bs-toggle="dropdown">Courses</a>
+                    <div class="dropdown-menu">
+                      <a href="courses/create_course.php" class="dropdown-item">Create Courses</a>
+                      <a href="courses/course_info.php" class="dropdown-item">Courses Info</a>
+                    </div>
                 </li>        
         <!-- ------------------------------------- -->
 
@@ -156,14 +173,9 @@ $data = $database->showTeacherInfo();
                 <div class="my-2">
                  <label for="class_category">Category</label>
                     <select name="class_category_id" class="form-control" id="class_category" required>
-                        <option value="1">Computer Basic</option>
-                        <option value="2">Java Course</option>
-                        <option value="3">UI/UX Design</option>
-                        <option value="4">programming Basic</option>
-                        <option value="5">Networking</option>
-                        <option value="6">Flutter Course</option>
-                        <option value="7">React Course</option>
-                        <option value="8">Professional Web Development</option>
+                        <?php foreach($dataCourse as $item) : ?>
+                            <option value="<?= $item->id?>"><?= $item->course?></option>
+                            <?php endforeach ?>
                     </select>
                 </div>
         
@@ -175,10 +187,10 @@ $data = $database->showTeacherInfo();
                 <div class="my-2">
                     <label for="teacher">Teacher</label>
                     <select name="teacher_id" class="form-control" id="teacher" required>
-                        <?php foreach($data as $item): ?>
+                        <?php foreach($dataTeacherAndCourse as $item): ?>
                         <option value="<?= $item->id?>">  
                         <?= $item->teacher_name?>
-                        (<span class="float-end"><?= $item->category_id ?></span>)
+                        (<span class="float-end"><?= $item->c_course ?></span>)
                         </option>
                         <?php endforeach ?>
                     </select>

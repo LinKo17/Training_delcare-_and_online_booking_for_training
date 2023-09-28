@@ -15,8 +15,14 @@ $id = $_GET["id"];
 $database = new UsersTable(new MySQL);
 $data = $database->showTeacherSingleData($id);
 
+?>
+<?php
+// ----------- course table data -----------
+use Libs\Database\UsersAnotherTable;
+$database = new UsersAnotherTable(new MySQL);
+$dataCourse = $database->takeCourse();
 
-
+// ----------- course table data -----------
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -112,8 +118,12 @@ $data = $database->showTeacherSingleData($id);
 
 
         <!-- ------------------------------------- -->
-        <li class="nav-item">
-                    <a class="nav-link  text-light btn btn-secondary m-2" href="#">Time Table</a>
+        <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-light btn btn-secondary m-2" href="#" data-bs-toggle="dropdown">Courses</a>
+                    <div class="dropdown-menu">
+                      <a href="../courses/create_course.php" class="dropdown-item">Create Courses</a>
+                      <a href="../courses/course_info.php" class="dropdown-item">Courses Info</a>
+                    </div>
                 </li>        
         <!-- ------------------------------------- -->
 
@@ -150,19 +160,14 @@ $data = $database->showTeacherSingleData($id);
                         <input type="text" class="form-control" placeholder="Teacher" id="teacher" required name="teacher_name" value="<?= $data->teacher_name ?>">
                     </div>
         
-                    <div class="my-3">
-                     <label for="class_category">Category</label>
-                        <select name="category_id" class="form-control" id="class_category" required>
-                            <option <?php echo $data->category_id == 1 ? "selected" : "" ?> value="1">Computer Basic</option>
-                            <option <?php echo $data->category_id == 2 ? "selected" : "" ?> value="2">Java Course</option>
-                            <option <?php echo $data->category_id == 3 ? "selected" : "" ?> value="3">UI/UX Design</option>
-                            <option <?php echo $data->category_id == 4 ? "selected" : "" ?> value="4">programming Basic</option>
-                            <option <?php echo $data->category_id == 5 ? "selected" : "" ?> value="5">Networking</option>
-                            <option <?php echo $data->category_id == 6 ? "selected" : "" ?> value="6">Flutter Course</option>
-                            <option <?php echo $data->category_id == 7 ? "selected" : "" ?> value="7">React Course</option>
-                            <option <?php echo $data->category_id == 8 ? "selected" : "" ?> value="8">Professional Web Development</option>
-                        </select>
-                    </div>
+                    <div class="my-2">
+                 <label for="class_category">Category</label>
+                    <select name="class_category_id" class="form-control" id="class_category" required>
+                        <?php foreach($dataCourse as $item) : ?>
+                            <option <?php echo $data->category_id == $item->id ? "selected" : "" ?> value="<?= $item->id ?>"> <?= $item->course?></option>
+                            <?php endforeach ?>
+                    </select>
+                </div>
         
                     <div class="my-3">
                         <label for="description">Description</label>

@@ -72,8 +72,12 @@ include("../../_action/teachers_data/teachers_create_data_info.php");
 
 
         <!-- ------------------------------------- -->
-        <li class="nav-item">
-                    <a class="nav-link  text-light btn btn-secondary m-2" href="#">Time Table</a>
+        <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-light btn btn-secondary m-2" href="#" data-bs-toggle="dropdown">Courses</a>
+                    <div class="dropdown-menu">
+                      <a href="../courses/create_course.php" class="dropdown-item">Create Courses</a>
+                      <a href="../courses/course_info.php" class="dropdown-item">Courses Info</a>
+                    </div>
                 </li>        
         <!-- ------------------------------------- -->
 
@@ -108,7 +112,6 @@ include("../../_action/teachers_data/teachers_create_data_info.php");
         <?php endif ?>    
     </div>
     <!-- session section -->   
-        <h1 class="h4 text-center">Teachers Information</h1>
     <!-- session section -->
     <div class="container">
         <?php if(isset($_SESSION["insert_post"])) : ?>

@@ -1,14 +1,3 @@
-<?php
-// ----------- course table data -----------
-include("../../vendor/autoload.php");
-use Libs\Database\MySQL;
-use Libs\Database\UsersAnotherTable;
-$database = new UsersAnotherTable(new MySQL);
-$dataCourse = $database->takeCourse();
-
-// ----------- course table data -----------
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,11 +21,10 @@ $dataCourse = $database->takeCourse();
         form{
             background-color: #fff;
         }
-    </style>
+    </style>    
 </head>
 <body>
-    <?php session_start() ?>
-<!-- navbar section -->
+ <!-- navbar section -->
 <nav class="navbar navbar-expand-lg bg-body-tertiary bg-primary navbar-dark">
   <div class="container">
   <span class="navbar-brand"><span class="fs-5"><span class="text-warning fs-3">My</span>Technology</span></span>
@@ -75,8 +63,8 @@ $dataCourse = $database->takeCourse();
         <li class="nav-item dropdown">
                     <a class="nav-link  text-light btn btn-info m-2 dropdown-toggle" data-bs-toggle="dropdown" href="">Teachers List</a>
                     <div class="dropdown-menu">
-                        <a href="" class="dropdown-item">Insert teacher</a>
-                        <a href="teachers_info.php" class="dropdown-item">Teacher info</a>
+                        <a href="../teachers/teachers_create.php" class="dropdown-item">Insert teacher</a>
+                        <a href="../teachers/teachers_info.php" class="dropdown-item">Teacher info</a>
                     </div>
                 </li>
 
@@ -106,68 +94,50 @@ $dataCourse = $database->takeCourse();
 </nav>
 <!-- navbar section -->
 
-    <div class="container" style="width:80%">
+<div class="container" style="width:80%">
+        <?php session_start() ?>
     <!-- session section -->
-    <?php if(isset($_SESSION["teacher_success"])) : ?>
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-        <?= $_SESSION["teacher_success"] ?>
-        <?php unset($_SESSION["teacher_success"]) ?>
+    <?php if(isset($_SESSION["course_success"])) : ?>
+    <div class="alert alert-success alert-dismissible fade show mt-2" role="alert">
+        <?= $_SESSION["course_success"] ?>
+        <?php unset($_SESSION["course_success"]) ?>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
     <?php endif ?>
 
-    <?php if(isset($_SESSION["teacher_fail"])) : ?>
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        <?= $_SESSION["teacher_fail"] ?>
-        <?php unset($_SESSION["teacher_fail"]) ?>
+    <?php if(isset($_SESSION["course_fail"])) : ?>
+    <div class="alert alert-danger alert-dismissible fade show mt-2" role="alert">
+        <?= $_SESSION["course_fail"] ?>
+        <?php unset($_SESSION["course_fail"]) ?>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
     <?php endif ?>    
-    <!-- session section -->         
+    <!-- session section --> 
 
-        <!-- teacher insert form -->
-        <div class="card mt-3">
-        <div class="card-header bg-primary text-light h5"> Add Teachers Form</div>
+      <!-- course create form -->
+    <div class="card mt-3">
+    <div class="card-header bg-primary text-light h5"> Create Course Form</div>
         <div class="card-body">
-            <form action="../../_action/teachers_data/teachers_create_data.php" method="post"  enctype="multipart/form-data">
-                <div class="my-3">
-                    <label for="teacher_image">Teacher Image</label>
-                    <input type="file" class="form-control" id="teacher_image" name="teacher_image" required>
-                </div>
-    
-                <div class="my-3">
-                    <label for="teacher">Teacher</label>
-                    <input type="text" class="form-control" placeholder="Teacher" id="teacher" required name="teacher_name">
-                </div>
-    
-                <div class="my-2">
-                 <label for="class_category">Category</label>
-                    <select name="class_category_id" class="form-control" id="class_category" required>
-                        <?php foreach($dataCourse as $item) : ?>
-                            <option value="<?= $item->id ?>"><?= $item->course?></option>
-                            <?php endforeach ?>
-                    </select>
-                </div>
-    
-                <div class="my-3">
-                    <label for="description">Description</label>
-                    <textarea  id="description"  rows="4" name="teacher_description" class="form-control"></textarea> 
-                </div>
-    
-                <div class="my-3">
-                    <input type="radio" style="opacity:0;"></input>
-                    <div class="float-end">
-                        <button type="reset" class="btn btn-danger ms-2">Reset</button>
-                    </div>
-                        <div class="float-end">
-                            <button type="submit" class="btn btn-success ms-2">Create</button>
-                        </div>
-                </div>
-            </form>
-
+          <form action="../../_action/courses_data/create_courses_data.php" method="post">
+            <div class="my-2">
+              <label for="course" class="mb-1">Course</label>
+              <input type="text" class="form-control" placeholder="Course" name="course" id="course" required>
+            </div>
+            <div class="my-2">
+              <label for="fee" class="mb-1">Fee</label>
+              <input type="text" class="form-control"  name="fee" id="fee" placeholder="Fee" required>
+            </div>
+            <div class="my-2">
+              <input type="radio" style="opacity:0">
+              <div class="float-end">
+                <button type="reset"class="btn btn-danger">Reset</button>
+                <button type="submit"class="btn btn-primary">Submit</button>
+              </div>
+            </div>
+          </form>
         </div>
-        </div>
-        <!-- /teacher insert form -->
     </div>
+</div>
+<!-- course create form -->
 </body>
 </html>

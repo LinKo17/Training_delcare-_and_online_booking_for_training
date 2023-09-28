@@ -2,6 +2,7 @@
 include("vendor/autoload.php");
 use Libs\Database\MySQL;
 use Libs\Database\UsersTable;
+use Libs\Database\UsersAnotherTable;
 use Helper\HTTP;
 use Helper\Auth;
 
@@ -25,6 +26,13 @@ list($dbminute, $dbhours, $ampm) = explode('/', $timeString);
 
 //---------------- /time management ----
 ?>
+<?php
+//----- join class_posts table and courses table to show course name
+$database = new UsersAnotherTable(new MySQL());
+$dataCourseName = $database->joinClassPostsAndCourses($id);
+
+//----- /join class_posts table and courses table to show course name
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -36,9 +44,7 @@ list($dbminute, $dbhours, $ampm) = explode('/', $timeString);
 
     <!-- bs js link -->
     <script src="js/bootstrap.bundle.min.js" defer> </script>
-
-    <!-- original css link -->
-    <link rel="stylesheet" href="style.css">    
+   
 
     <style>
         body {
@@ -104,7 +110,7 @@ list($dbminute, $dbhours, $ampm) = explode('/', $timeString);
                 <img src="classPostPhotos/<?= $data[0]->image ?>" alt="">
             </li>
             <li class="list-group-item">
-                <h1 class="h5 text-center"><?= $data[0]->category_id ?></h1>
+                <h1 class="h5 text-center"><?= $dataCourseName[0]->c_course ?></h1>
             </li>
             <li class="list-group-item"><?= $data[0]->description ?></li>
             <li class="list-group-item">
@@ -115,7 +121,7 @@ list($dbminute, $dbhours, $ampm) = explode('/', $timeString);
                 Class Start : <?= $data[0]->class_date ?>
             </li>
             <li class="list-group-item">
-                Class Time : <?= $dbhours . " hours - " . $dbminute . " minute - " . $ampm ?>
+                Class Time : <?= $dbhours . "hrs: " . $dbminute . "mins  (" . $ampm . ")"?>
             </li>
         </ul>
     </div>

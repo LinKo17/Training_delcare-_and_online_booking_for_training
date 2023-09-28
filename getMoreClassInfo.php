@@ -2,11 +2,12 @@
 include("vendor/autoload.php");
 use Libs\Database\MySQL;
 use Libs\Database\UsersTable;
+use Libs\Database\UsersAnotherTable;
 use Helper\HTTP;
 use Helper\Auth;
 
-$db = new UsersTable(new MySQL);
-$data = $db->showClassPost();
+$db = new UsersAnotherTable(new MySQL);
+$data = $db->joinClassPostsAndCoursesAll();
 
 session_start();
 $random =  Auth::randomNumber();
@@ -24,8 +25,15 @@ $random =  Auth::randomNumber();
     <!-- bs js link -->
     <script src="js/bootstrap.bundle.min.js" defer> </script>
 
-    <!-- original css link -->
-    <link rel="stylesheet" href="style.css">
+    <style>
+    body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+
 </head>
 <body style="font-family: Arial, sans-serif;background-color: #f0f0f0;margin: 0;padding: 0;">
     <!-- navbar section -->
@@ -48,7 +56,7 @@ $random =  Auth::randomNumber();
             <div class="border card p-1">
                 <div class="card-body">
                     <img src="classPostPhotos/<?= $item->image?>" alt="" style="width:100%; height:200px;">
-                    <h1 class="h5 text-center my-1"><?= $item->category_id ?></h1>
+                    <h1 class="h5 text-center my-2"><?= $item->c_course ?></h1>
                 </div>
                 <div class="card-footer">
                     <a style="width:32%" href="indexDetail.php?id=<?= $item->id?>&&rd=<?=$random?>&&ds=all" class="btn btn-secondary float-end">Details</a>

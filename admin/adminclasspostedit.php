@@ -10,6 +10,15 @@ $teachers_data = $database->showTeacherInfo();
 ?>
 
 <?php
+// ----------- course table data -----------
+use Libs\Database\UsersAnotherTable;
+$database = new UsersAnotherTable(new MySQL);
+$dataCourse = $database->takeCourse();
+
+// ----------- course table data -----------
+?>
+
+<?php
 include("../vendor/autoload.php");
 // use Libs\Database\MySQL;
 // use Libs\Database\UsersTable;
@@ -151,8 +160,12 @@ list($dbminute, $dbhours, $ampm) = explode('/', $timeString);
 
 
         <!-- ------------------------------------- -->
-        <li class="nav-item">
-                    <a class="nav-link  text-light btn btn-secondary m-2" href="#">Time Table</a>
+        <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-light btn btn-secondary m-2" href="#" data-bs-toggle="dropdown">Courses</a>
+                    <div class="dropdown-menu">
+                      <a href="courses/create_course.php" class="dropdown-item">Create Courses</a>
+                      <a href="courses/course_info.php" class="dropdown-item">Courses Info</a>
+                    </div>
                 </li>        
         <!-- ------------------------------------- -->
 
@@ -189,14 +202,9 @@ list($dbminute, $dbhours, $ampm) = explode('/', $timeString);
                 <div class="my-2">
                  <label for="class_category">Category</label>
                     <select name="class_category_id" class="form-control" id="class_category" required>
-                        <option <?php echo $data->category_id == 1 ? "selected" : "" ?> value="1">Java Course</option>
-                        <option <?php echo $data->category_id == 2 ? "selected" : "" ?> value="2">Computer Basic</option>
-                        <option <?php echo $data->category_id == 3 ? "selected" : "" ?> value="3">UI/UX Design</option>
-                        <option <?php echo $data->category_id == 4 ? "selected" : "" ?> value="4">programming Basic</option>
-                        <option <?php echo $data->category_id == 5 ? "selected" : "" ?> value="5">Networking</option>
-                        <option <?php echo $data->category_id == 6 ? "selected" : "" ?> value="6">Flutter Course</option>
-                        <option <?php echo $data->category_id == 7 ? "selected" : "" ?> value="7">React Course</option>
-                        <option <?php echo $data->category_id == 8 ? "selected" : "" ?> value="8">Professional Web Development</option>
+                        <?php foreach($dataCourse as $item) : ?>
+                            <option <?php echo $data->category_id == $item->id ? "selected" : "" ?> value="<?= $item->id ?>"><?= $item->course ?></option>
+                            <?php endforeach ?>
                     </select>
                 </div>
     

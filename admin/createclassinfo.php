@@ -18,8 +18,11 @@ include("../_action/createclassinfodata.php");
     <link rel="stylesheet" href="style.css">
 
     <style>
-        body{
-            background:#f0f0f0;
+    body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
         }
     </style>
 </head>
@@ -72,8 +75,12 @@ include("../_action/createclassinfodata.php");
 
 
         <!-- ------------------------------------- -->
-        <li class="nav-item">
-                    <a class="nav-link  text-light btn btn-secondary m-2" href="#">Time Table</a>
+        <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-light btn btn-secondary m-2" href="#" data-bs-toggle="dropdown">Courses</a>
+                    <div class="dropdown-menu">
+                      <a href="courses/create_course.php" class="dropdown-item">Create Courses</a>
+                      <a href="courses/course_info.php" class="dropdown-item">Courses Info</a>
+                    </div>
                 </li>        
         <!-- ------------------------------------- -->
 
@@ -119,7 +126,7 @@ include("../_action/createclassinfodata.php");
                 <div class="">
                     <img src="../classPostPhotos/<?= $item->image?>" alt="" style="width:100%; height:200px;">
                 </div>
-                <h1 class="h5 text-center my-1"><?= $item->category_id ?></h1>
+                <h1 class="h5 text-center my-2"><?= $item->c_course ?></h1>
                 <div class="card-footer">
                     <a style="width:32%" href="adminclasspostedit.php?id=<?= $item->id?>&&rd=<?=$random?>" class="btn btn-primary">Edit</a>
                     <a style="width:32%" href="../_action/adminclasspostdelete.php?id=<?= $item->id?>&&rd=<?=$random?>" class="btn btn-danger" onclick="return confirm('Are you Sure?')">Delete</a>

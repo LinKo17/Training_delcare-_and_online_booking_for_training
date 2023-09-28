@@ -12,7 +12,7 @@ if($img_type == "image/jpg" || $img_type == "image/jpeg"){
 }
 
 $teacher_name = htmlspecialchars($_POST["teacher_name"]);
-$category_id = htmlspecialchars($_POST["category_id"]);
+$category_id = htmlspecialchars($_POST["class_category_id"]);
 $teacher_description = htmlspecialchars($_POST["teacher_description"]);
 
 $data =[
