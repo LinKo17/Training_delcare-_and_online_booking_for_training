@@ -101,9 +101,13 @@ $data =$database->takeSingleCourse($_GET["id"]);
 
 
         <!-- ------------------------------------- -->
-        <li class="nav-item">
-                    <a class="nav-link  text-light btn btn-success m-2" href="#">Payment</a>
-                </li>        
+        <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-light btn btn-success m-2" href="#" data-bs-toggle="dropdown">Contact</a>
+                    <div class="dropdown-menu">
+                      <a href="../contact/social_media_link.php" class="dropdown-item">Social Media</a>
+                      <a href="../contact/users_msg.php" class="dropdown-item">Users Message</a>
+                    </div>
+                </li>         
         <!-- ------------------------------------- -->
 
       </ul>

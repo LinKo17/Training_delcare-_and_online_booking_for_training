@@ -1,4 +1,10 @@
-<?php session_start() ?>
+<?php 
+include("../../_action/contact_data/contact_data.php");
+use Helper\Auth;
+session_start();
+$random = Auth::randomNumber();
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,16 +19,14 @@
     <script src="../../bs/js/bootstrap.bundle.min.js" defer> </script>
 
     <style>
-        body {
+    body {
             font-family: Arial, sans-serif;
             background-color: #f0f0f0;
             margin: 0;
             padding: 0;
         }
-        form{
-            background-color: #fff;
-        }
     </style>    
+
 </head>
 <body>
  <!-- navbar section -->
@@ -87,8 +91,8 @@
         <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle text-light btn btn-success m-2" href="#" data-bs-toggle="dropdown">Contact</a>
                     <div class="dropdown-menu">
-                      <a href="../contact/social_media_link.php" class="dropdown-item">Social Media</a>
-                      <a href="../contact/users_msg.php" class="dropdown-item">Users Message</a>
+                      <a href="social_media_link.php" class="dropdown-item">Social Media</a>
+                      <a href="" class="dropdown-item">Users Message</a>
                     </div>
                 </li>         
         <!-- ------------------------------------- -->
@@ -99,50 +103,37 @@
 </nav>
 <!-- navbar section -->
 
+<!-- user contact information section -->
+<div class="container" style="width:100%;"> 
+    <div class="row">
+        <?php foreach($data as $item) : ?>
+        <div class="col-lg-4  p-2 col-md-6">
 
-<div class="container" style="width:80%">
-    <!-- session section -->
-    <?php if(isset($_SESSION["course_success"])) : ?>
-    <div class="alert alert-success alert-dismissible fade show mt-2" role="alert">
-        <?= $_SESSION["course_success"] ?>
-        <?php unset($_SESSION["course_success"]) ?>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-    <?php endif ?>
+            <div class="border card p-1">
 
-    <?php if(isset($_SESSION["course_fail"])) : ?>
-    <div class="alert alert-danger alert-dismissible fade show mt-2" role="alert">
-        <?= $_SESSION["course_fail"] ?>
-        <?php unset($_SESSION["course_fail"]) ?>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-    <?php endif ?>    
-    <!-- session section --> 
+                <div class="card-header bg-info">
+                    <h1 class="h5 d-inline-block "><?=$item->email ?></h1>
 
-      <!-- course create form -->
-    <div class="card mt-3">
-    <div class="card-header bg-primary text-light h5"> Create Course Form</div>
-        <div class="card-body">
-          <form action="../../_action/courses_data/create_courses_data.php" method="post">
-            <div class="my-2">
-              <label for="course" class="mb-1">Course</label>
-              <input type="text" class="form-control" placeholder="Course" name="course" id="course" required>
+                    <?php if($item->done == 0): ?>
+                        <span class="badge bg-danger float-end">!</span>
+                        <?php endif ?>
+                </div>
+
+                <div class="card-body">
+                    <h1 class="h5  my-2"><?= substr($item->content,0,200); ?></h1>
+                </div>
+
+                <div class="card-footer">
+                    <a style="width:35%" href="../../_action/contact_data/contact_delete.php?id=<?= $item->id?>&&rd=<?= $random ?>" class="btn btn-danger" onclick="return confirm('Are you Sure?')">Delete</a>
+                    <a style="width:63%" href="users_msg_detail.php?id=<?= $item->id?>&&rd=<?= $random ?>" class="btn btn-secondary">Read More</a>
+                </div>
             </div>
-            <div class="my-2">
-              <label for="fee" class="mb-1">Fee</label>
-              <input type="text" class="form-control"  name="fee" id="fee" placeholder="Fee" required>
-            </div>
-            <div class="my-2">
-              <input type="radio" style="opacity:0">
-              <div class="float-end">
-                <button type="reset"class="btn btn-danger">Reset</button>
-                <button type="submit"class="btn btn-primary">Submit</button>
-              </div>
-            </div>
-          </form>
         </div>
+        <?php endforeach ?>
+
+
     </div>
 </div>
-<!-- course create form -->
+<!-- user contact information section -->
 </body>
 </html>

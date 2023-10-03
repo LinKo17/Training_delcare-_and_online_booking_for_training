@@ -67,7 +67,7 @@ session_start();
           <a href="courses/course_info.php" class="nav-link active btn btn-light text-dark"> Courses And Fee </a>
           </li>
           <li class="nav-item my-1">
-            <a href="" class="nav-link active">action</a>
+          <a href="others/contact_us.php" class="nav-link active btn btn-light text-dark"> Contact Us</a>
           </li>
           <li class="nav-item my-1">
             <a href="admin/adminpanel.php" class="nav-link active btn btn-danger">Admin</a>

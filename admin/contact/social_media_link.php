@@ -1,4 +1,12 @@
-<?php session_start() ?>
+<?php
+include("../../_action/contact_data/media_data.php");
+// print_r($data);
+
+use Helper\Auth;
+session_start();
+$random = Auth::randomNumber();
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,16 +21,14 @@
     <script src="../../bs/js/bootstrap.bundle.min.js" defer> </script>
 
     <style>
-        body {
+    body {
             font-family: Arial, sans-serif;
             background-color: #f0f0f0;
             margin: 0;
             padding: 0;
         }
-        form{
-            background-color: #fff;
-        }
     </style>    
+
 </head>
 <body>
  <!-- navbar section -->
@@ -87,8 +93,8 @@
         <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle text-light btn btn-success m-2" href="#" data-bs-toggle="dropdown">Contact</a>
                     <div class="dropdown-menu">
-                      <a href="../contact/social_media_link.php" class="dropdown-item">Social Media</a>
-                      <a href="../contact/users_msg.php" class="dropdown-item">Users Message</a>
+                      <a href="" class="dropdown-item">Social Media</a>
+                      <a href="users_msg.php" class="dropdown-item">Users Message</a>
                     </div>
                 </li>         
         <!-- ------------------------------------- -->
@@ -99,50 +105,115 @@
 </nav>
 <!-- navbar section -->
 
+<!-- social form -->
+<div class="container mt-2" style="width:80%">
+<div class="card">
+  <div class="card-header bg-primary text-light h5">Social Media Controller </div>
+  <div class="card-body">
 
-<div class="container" style="width:80%">
-    <!-- session section -->
-    <?php if(isset($_SESSION["course_success"])) : ?>
-    <div class="alert alert-success alert-dismissible fade show mt-2" role="alert">
-        <?= $_SESSION["course_success"] ?>
-        <?php unset($_SESSION["course_success"]) ?>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-    <?php endif ?>
+<!-- ------------------   facebook      -->
+<form action="../../_action/contact_data/media_edit_data.php?rd=<?= $random?>&md=fb" method="post" class="my-3">
 
-    <?php if(isset($_SESSION["course_fail"])) : ?>
-    <div class="alert alert-danger alert-dismissible fade show mt-2" role="alert">
-        <?= $_SESSION["course_fail"] ?>
-        <?php unset($_SESSION["course_fail"]) ?>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-    <?php endif ?>    
-    <!-- session section --> 
+    <label>Facebook</label>
 
-      <!-- course create form -->
-    <div class="card mt-3">
-    <div class="card-header bg-primary text-light h5"> Create Course Form</div>
-        <div class="card-body">
-          <form action="../../_action/courses_data/create_courses_data.php" method="post">
-            <div class="my-2">
-              <label for="course" class="mb-1">Course</label>
-              <input type="text" class="form-control" placeholder="Course" name="course" id="course" required>
-            </div>
-            <div class="my-2">
-              <label for="fee" class="mb-1">Fee</label>
-              <input type="text" class="form-control"  name="fee" id="fee" placeholder="Fee" required>
-            </div>
-            <div class="my-2">
-              <input type="radio" style="opacity:0">
-              <div class="float-end">
-                <button type="reset"class="btn btn-danger">Reset</button>
-                <button type="submit"class="btn btn-primary">Submit</button>
-              </div>
-            </div>
-          </form>
-        </div>
+    <div class="input-group">
+      <input type="text" class="form-control mt-1" value="<?= $data->facebook?>" name="facebook">
+        <button class="btn btn-danger"  href="../../_action/contact_data/media_edit_data.php">Edit</button>
     </div>
+
+  </form>
+
+<!-- ------------------  facebook       -->
+
+
+<!-- ------------------  viber       -->
+<form action="../../_action/contact_data/media_edit_data.php?rd=<?= $random?>&md=vb" method="post" class="my-3">
+
+    <label>Viber</label>
+
+    <div class="input-group">
+      <input type="text" class="form-control mt-1" value="<?= $data->viber?>" name="viber">
+        <button class="btn btn-danger"  href="../../_action/contact_data/media_edit_data.php">Edit</button>
+    </div>
+
+  </form>
+<!-- ------------------  viber       -->
+
+<!-- ------------------  telegram       -->
+<form action="../../_action/contact_data/media_edit_data.php?rd=<?= $random?>&md=tg" method="post" class="my-3">
+
+    <label>Telegram</label>
+
+    <div class="input-group">
+      <input type="text" class="form-control mt-1" value="<?= $data->telegram?>" name="telegram">
+        <button class="btn btn-danger"  href="../../_action/contact_data/media_edit_data.php">Edit</button>
+    </div>
+
+  </form>
+<!-- ------------------  telegram       -->
+
+
+<!-- ------------------  phone 1       -->
+<form action="../../_action/contact_data/media_edit_data.php?rd=<?= $random?>&md=ph1" method="post" class="my-3">
+
+    <label>Phone_1</label>
+
+    <div class="input-group">
+      <input type="text" class="form-control mt-1" value="<?= $data->phone_1?>" name="phone_1">
+        <button class="btn btn-danger"  href="../../_action/contact_data/media_edit_data.php">Edit</button>
+    </div>
+
+  </form>
+<!-- ------------------  phone 1       -->
+
+<!-- ------------------  phone 2       -->
+<form action="../../_action/contact_data/media_edit_data.php?rd=<?= $random?>&md=ph2" method="post" class="my-3">
+
+    <label>Phone_2</label>
+
+    <div class="input-group">
+      <input type="text" class="form-control mt-1" value="<?= $data->phone_2?>" name="phone_2">
+        <button class="btn btn-danger"  href="../../_action/contact_data/media_edit_data.php">Edit</button>
+    </div>
+
+  </form>
+<!-- ------------------  phone 2       -->
+
+<!-- ------------------  phone 3       -->
+<form action="../../_action/contact_data/media_edit_data.php?rd=<?= $random?>&md=ph3" method="post" class="my-3">
+
+    <label>Phone_3</label>
+
+    <div class="input-group">
+      <input type="text" class="form-control mt-1" value="<?= $data->phone_3?>" name="phone_3">
+        <button class="btn btn-danger">Edit</button>
+    </div>
+
+  </form>
+<!-- ------------------  phone 3       -->
+
+
+<!-- ------------------  mail       -->
+<form action="../../_action/contact_data/media_edit_data.php?rd=<?= $random?>&md=mail" method="post" class="my-3">
+
+    <label>Mail</label>
+
+    <div class="input-group">
+      <input type="text" class="form-control mt-1"  name="mail" value="<?= $data->mail ?>">
+        <button class="btn btn-danger">Edit</button>
+    </div>
+
+  </form>
+<!-- ------------------  mail       -->
+
+
+
+
+    
+
+  </div>
 </div>
-<!-- course create form -->
+</div>
+<!-- social form -->
 </body>
 </html>
