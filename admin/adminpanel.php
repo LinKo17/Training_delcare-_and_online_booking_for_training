@@ -1,3 +1,15 @@
+<?php
+include("../vendor/autoload.php");
+use Libs\Database\MySQL;
+use Libs\Database\UserLoginSystem;
+use Helper\Auth;
+session_start();
+$random = Auth::randomNumber();
+
+
+$database = new UserLoginSystem(new MySQL());
+$allUsersData = $database-> userRoleIdAndRolesId();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,83 +28,90 @@
 <body>
 
 <!-- navbar section -->
-<nav class="navbar navbar-expand-lg bg-body-tertiary bg-primary navbar-dark">
-  <div class="container">
-  <span class="navbar-brand"><span class="fs-5"><span class="text-warning fs-3">My</span>Technology</span></span>
-
-    <!-- responsive button -->
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <!-- responsive button -->
-
-
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav">
-        <!-- ------------------------------------- -->
-        <li class="list-item dropdown">
-                    <a class="nav-link  text-light btn btn-dark m-2 dropdown-toggle" data-bs-toggle="dropdown" href="">Home</a>
-                    <div class="dropdown-menu">
-                        <a href="" class="dropdown-item">Admin Panel</a>
-                        <a href="../index.php" class="dropdown-item">Home</a>
-                    </div>
-                </li> 
-        <!-- ------------------------------------- -->
-
-        <!-- ------------------------------------- -->
-        <li class="nav-item dropdown">
-                    <a class="nav-link text-light btn btn-warning m-2  dropdown-toggle" href="" data-bs-toggle="dropdown">Active Classes</a>
-                    <div class="dropdown-menu">
-                        <a href="createclasspost.php" class="dropdown-item">Create Classes</a>
-                        <a href="createclassinfo.php" class="dropdown-item">Classes Info</a>
-                    </div>
-                </li>        
-        <!-- ------------------------------------- -->
-
-
-        <!-- ------------------------------------- -->
-        <li class="nav-item dropdown">
-                    <a class="nav-link  text-light btn btn-info m-2 dropdown-toggle" data-bs-toggle="dropdown" href="">Teachers List</a>
-                    <div class="dropdown-menu">
-                        <a href="teachers/teachers_create.php" class="dropdown-item">Insert teacher</a>
-                        <a href="teachers/teachers_info.php" class="dropdown-item">Teacher info</a>
-                    </div>
-                </li>
-
-        <!-- ------------------------------------- -->
-
-
-        <!-- ------------------------------------- -->
-        <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle text-light btn btn-secondary m-2" href="#" data-bs-toggle="dropdown">Courses</a>
-                    <div class="dropdown-menu">
-                      <a href="courses/create_course.php" class="dropdown-item">Create Courses</a>
-                      <a href="courses/course_info.php" class="dropdown-item">Courses Info</a>
-                    </div>
-                </li>        
-        <!-- ------------------------------------- -->
-
-
-        <!-- ------------------------------------- -->
-        <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle text-light btn btn-success m-2" href="#" data-bs-toggle="dropdown">Contact</a>
-                    <div class="dropdown-menu">
-                      <a href="contact/social_media_link.php" class="dropdown-item">Social Media</a>
-                      <a href="contact/users_msg.php" class="dropdown-item">Users Message</a>
-                    </div>
-                </li>         
-        <!-- ------------------------------------- -->
-
-      </ul>
-    </div>
-  </div>
-</nav>
+<?php require_once("adminNavbar.php"); ?>
 <!-- navbar section -->
 
-<h1>Helo Admin panel </h1>
+<!-- user information -->
+<div class="container mt-2">
+    <table class="table text-center table-bordered table-hover table-dark table-striped">
+        <tr>
+            <th>No.</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Action</th>
+        </tr>
 
+        <?php foreach($allUsersData as $item): ?>
+        <tr>
+            <td><?= $item->id ?></td>
+            <td><?= $item->username ?></td>
+            <td><?= $item->email ?></td>
+
+            <td>
+
+                <?php if($item->role_id == 1) : ?>
+
+                <span class="badge bg-secondary">
+                        <?= $item->r_role_id ?>              
+                    </span>
+
+                <?php elseif($item->role_id == 3): ?>
+
+                    <span class="badge bg-success">
+                        <?= $item->r_role_id ?>              
+                    </span>
+
+                <?php elseif($item->role_id == 4) : ?>
+
+                    <span class="badge bg-info">
+                        <?= $item->r_role_id ?>              
+                </span>
+
+                <?php elseif($item->role_id == 5): ?>
+
+                    <span class="badge bg-primary">
+                        <?= $item->r_role_id ?>              
+                    </span>
+
+                <?php endif ?>
+        </td>
+
+            <td>
+
+                <div class="btn-group">
+                    <button class="btn btn-outline-light dropdown btn-sm">
+                        <span class="dropdown-toggle" data-bs-toggle="dropdown">Role</span>
+
+                        <div class="dropdown-menu">
+                            <a href="../_action//usermanagement/role_change.php?role=1&id=<?= $item->id ?>&rd=<?=$random?>" class="dropdown-item text-center">User</a>
+
+                            <a  href="../_action//usermanagement/role_change.php?role=3&id=<?= $item->id ?>&rd=<?=$random?>" class="dropdown-item text-center">Teacher</a>
+
+                            <a  href="../_action//usermanagement/role_change.php?role=4&id=<?= $item->id ?>&rd=<?=$random?>" class="dropdown-item text-center">Admin</a>
+
+                            <a  href="../_action//usermanagement/role_change.php?role=5&id=<?= $item->id ?>&rd=<?=$random?>" class="dropdown-item text-center">Manager</a>
+                        </div>
+                    </button>
+
+                    <?php if($item->ban == 1) :?>
+                    <a href="../_action/usermanagement/unban.php?id=<?=$item->id?>&rd=<?=$random?>" class="btn btn-outline-warning btn-sm">Banned</a>
+                    <?php else : ?>
+                        <a href="../_action/usermanagement/ban.php?id=<?=$item->id?>&rd=<?= $random ?>" class="btn btn-outline-success btn-sm">Active</a>
+                    <?php endif ?>
+
+                    
+                    <a href="../_action/usermanagement/delete_User.php?id=<?= $item->id ?>&rd=<?= $random?>"  class="btn btn-outline-danger btn-sm">Delete</a>
+                </div>
+            </td>
+        </tr>
+        <?php endforeach ?>
+    </table>
+</div>
+<!-- /user information -->
 
 
 
 </body>
 </html>
+<!-- လင်းကိုဘီလီယံနာဖြစ်ဖို့နားရက်မရှိ -->

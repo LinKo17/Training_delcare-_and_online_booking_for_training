@@ -84,6 +84,12 @@ $mediaLink = $mediaDatabase->mediaData();
         #container-width{
           width:80%;
         }
+
+        #style_footer{
+            position: absolute;
+            bottom:0px;
+            width:100%;
+        }
         @media(max-width:900px){
           #container-width{
             width:100%;
@@ -115,40 +121,40 @@ $mediaLink = $mediaDatabase->mediaData();
       <!-- navbar section -->
       <div class="navbar navbar-dark navbar-expand bg-primary">
         <div class="container">
-            <a href="" class="navbar-brand"><span class="fs-5"><span class="text-warning fs-3">My</span>Technology</span></a>
-            <div class="navbar-nav">
-                <a href="../index.php" class="btn btn-dark nav-link active">Back</a>
-            </div>
+            <a href="../index.php" class="navbar-brand"><span class="fs-5"><span class="text-warning fs-3">My</span>Technology</span></a>
         </div>
     </div>
     <!-- navbar section -->
 
-    <?php session_start()?>
- <div class="container" style="width:80%">
     <!-- session section -->
-    <?php if(isset($_SESSION["send_success"])) : ?>
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-        <?= $_SESSION["send_success"] ?>
-        <?php unset($_SESSION["send_success"]) ?>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-    <?php endif ?>
-
-    <?php if(isset($_SESSION["send_fail"])) : ?>
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        <?= $_SESSION["send_fail"] ?>
-        <?php unset($_SESSION["send_fail"]) ?>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-    <?php endif ?>    
- </div>
-    <!-- session section --> 
+    <?php session_start()?>
+    <div class="container" id="container-width">
+        <?php if(isset($_SESSION["send_success"])) : ?>
+            <div class="alert alert-success alert-dismissible fade show mt-1" role="alert">
+                <?= $_SESSION["send_success"] ?>
+                <?php unset($_SESSION["send_success"]) ?>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        <?php endif ?>
     
+        <?php if(isset($_SESSION["send_fail"])) : ?>
+            <div class="alert alert-danger alert-dismissible fade show mt-1" role="alert">
+                <?= $_SESSION["send_fail"] ?>
+                <?php unset($_SESSION["send_fail"]) ?>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        <?php endif ?>    
+    </div>
+    <!-- session section -->     
     
 <!-- showing   courses information -->
 <div class="container" id="container-width">
+
 <div class="card mt-3 g-0">
+
     <div class="card-header bg-primary text-light h5 text-center">Content Us</div>
+
+    <?php if(isset($_SESSION["userInfo"])) : ?>
         <div class="card-body">
             <form action="../_action/contact_data/insert_contact_data.php" method="post">
                 <div class="my-2">
@@ -164,8 +170,8 @@ $mediaLink = $mediaDatabase->mediaData();
                 <div class="my-2">
                     <input type="radio" style="opacity:0;">
                     <div class="float-end">
-                        <button type="reset" class="btn btn-danger">Reset</button>
-                        <button class="btn btn-primary" type="submit">Submit</button>
+                            <button type="reset" class="btn btn-danger">Reset</button>
+                            <button class="btn btn-primary" type="submit">Submit</button>
                     </div>
                 </div>
             </form>
@@ -207,11 +213,31 @@ $mediaLink = $mediaDatabase->mediaData();
                 </a>
             </div>
         </div>
-    </div>        
+    </div> 
+
+
+    <?php else :?>
+
+
+        <div class="card-body  text-center h4">
+            You haven't Sign in or Sign Up yet!
+
+            <br>
+            <span class="h6">
+                Please <a href="../log/sign_in.php">Sign In</a> or <a href="../log/sign_up.php">Sign Up</a> Here First
+            </span>
+        </div>
+
+        
+        <?php endif ?>
     </div>    
 </div>
 <!-- /showing courses information -->  
     
-    
+    <!-- footer -->
+    <div id="style_footer">
+        <?php include("../teachers/extra_footer.php"); ?>
+    </div>
+    <!-- footer -->
 </body>
 </html>

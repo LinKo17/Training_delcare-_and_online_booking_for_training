@@ -1,12 +1,10 @@
 <?php
 include("../vendor/autoload.php");
 use Libs\Database\MySQL;
-use Libs\Database\UsersTable;
-use Helper\HTTP;
-use Libs\Database\UsersAnotherTable;
+use Libs\Database\AboutUsAndOthers;
 
-$database = new UsersAnotherTable(new MySQL);
-$data = $database->takeCourse();
+$database = new AboutUsAndOthers(new MySQL());
+$data = $database->takeAboutUsData();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -18,7 +16,10 @@ $data = $database->takeCourse();
     <link rel="stylesheet" href="../bs/css/bootstrap.min.css">
 
     <!-- bs js link -->
-    <script src="../js/bootstrap.bundle.min.js" defer> </script> 
+    <script src="../bs/js/bootstrap.bundle.min.js" defer> </script> 
+
+    <!-- awesome icon link -->
+    <link rel="stylesheet" href="../bs/css/all.min.css">
 
     <style>
         body {
@@ -45,8 +46,42 @@ $data = $database->takeCourse();
         form{
             background:#fff;
         }
+        .edit-icon{
+            width:50px;
+            height:50px;
+            border-radius:100px;
+            background-color:white;
+            margin:0px 2px;
+            display:flex;
+            position:relative;
+        }
+        .edit-icon:hover{
+            background-color:#212529;
+            color:#fff0f3;
+        }
+        .icon-inner-edit{
+            position:absolute;
+            bottom:7px;
+            right:9px;
+        }
+
+        .f-size{
+            font-size:30px;
+        }
+
+        .fs-edit{
+            margin-top:10px;
+            font-size:20px;
+            color:#ffffff;
+        }
         #container-width{
           width:80%;
+        }
+
+        #style_footer{
+            position: absolute;
+            bottom:0px;
+            width:100%;
         }
         @media(max-width:900px){
           #container-width{
@@ -84,36 +119,31 @@ $data = $database->takeCourse();
     </div>
     <!-- navbar section -->
 
-<!-- showing   courses information -->
+<!-- showing   about us information -->
 <div class="container" id="container-width">
-<div class="card mt-3">
-    <div class="card-header bg-primary text-light h5 text-center">Courses</div>
-        <div class="card-body">
-          <table class="table table-striped table-bordered table-hover ">
-            <tr>
-              <th>Courses</th>
-              <th>Fee</th>
-            </tr>
-            <?php foreach($data as $item) : ?>
-                <?php if($item->hide == 0) : ?>
-            <tr>
-              <th><?= $item->course ?></th>
-              <th><?= $item->fee ?></th>
-            </tr>
-            <?php endif ?>
-            <?php endforeach ?>
-          </table>
-        </div>
+<div class="card mt-3 g-0">
+
+    <div class="card-header bg-primary text-light h5 text-center">About Us</div>
+    <div class="card-body" style="text-indent:50px;">
+        <?php if($data->about_us == ""): ?>
+            <?= "Hellooo Learner" ?>
+        <?php else: ?>
+            <?= $data->about_us ?>
+        <?php endif ?>
+
+    </div>
+    </div>        
     </div>    
 </div>
-<!-- /showing courses information -->  
-   
+<!-- showing   about us information -->     
 
     <!-- footer -->
-    <div class="mt-5">
+    <div id="style_footer">
         <?php include("../teachers/extra_footer.php"); ?>
     </div>
     <!-- footer -->
+     
+    
     
 </body>
 </html>

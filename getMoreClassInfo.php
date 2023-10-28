@@ -39,11 +39,7 @@ $random =  Auth::randomNumber();
     <!-- navbar section -->
     <div class="navbar navbar-dark navbar-expand bg-primary">
         <div class="container">
-            <a href="" class="navbar-brand"><span class="fs-5"><span class="text-warning fs-3">My</span>Technology</span></a>
-            <div class="navbar-nav">
-                <a href="index.php" class="btn btn-dark nav-link active">Back</a>
-
-            </div>
+            <a href="index.php" class="navbar-brand"><span class="fs-5"><span class="text-warning fs-3">My</span>Technology</span></a>
         </div>
     </div>
     <!-- navbar section -->
@@ -70,5 +66,10 @@ $random =  Auth::randomNumber();
 </div>
 <!-- /showing class post information -->        
 
+    <!-- footer -->
+    <div class="mt-5">
+        <?php include("index_footer.php"); ?>
+    </div>
+    <!-- footer -->
 </body>
 </html>

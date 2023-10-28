@@ -31,7 +31,7 @@ class MySQL{
                 PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ,
             ]);
             return $this->db;
-        }catch(Exception $e){
+        }catch(PDOException $e){
             return $e->getMessage();
             exit();
         }

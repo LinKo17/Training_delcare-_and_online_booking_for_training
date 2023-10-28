@@ -6,9 +6,17 @@ use Libs\Database\UsersAnotherTable;
 use Helper\HTTP;
 use Helper\Auth;
 
+session_start();
+// session_destroy();
+
+if(isset($_SESSION["userInfo"])){
+  $userData = $_SESSION["userInfo"];
+}
+
+
 $database = new UsersAnotherTable(new MySQL);
 $data = $database->joinClassPostsAndCoursesLimit();
-session_start();
+// session_start();
 // echo Auth::randomNumber();
 ?>
 <!DOCTYPE html>
@@ -60,15 +68,48 @@ session_start();
 
       <div class="offcanvas-body">
         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+
           <li class="nav-item my-1">
             <a href="teachers/teachers_info.php" class="nav-link active btn btn-light text-dark"> Teachers </a>
           </li>
+
           <li class="nav-item my-1">
           <a href="courses/course_info.php" class="nav-link active btn btn-light text-dark"> Courses And Fee </a>
           </li>
+
           <li class="nav-item my-1">
           <a href="others/contact_us.php" class="nav-link active btn btn-light text-dark"> Contact Us</a>
           </li>
+
+          <li class="nav-item my-1">
+          <a href="others/about_us.php" class="nav-link active btn btn-light text-dark"> About Us</a>
+          </li>
+
+          <li class="nav-item my-1 dropdown">
+          <a href="others/about_us.php dropdown-toggle" class="nav-link active btn btn-light text-dark" data-bs-toggle="dropdown">
+
+          <?php if(isset($_SESSION["userInfo"])): ?>
+              <?php echo $userData->username ?>
+            <?php else : ?>
+                User
+              <?php endif ?>
+
+          </a>
+
+          <div class="dropdown-menu">
+          <?php if(isset($_SESSION["userInfo"])): ?>
+
+            <a href="_action/log/sign_out_data.php" class="dropdown-item text-center">Sign Out</a>
+
+            <?php else : ?>
+
+              <a href="log/sign_in.php" class="dropdown-item text-center">Sign In</a>
+              <a href="log/sign_up.php" class="dropdown-item text-center">Sign Up</a>
+
+              <?php endif ?>
+          </div>
+          </li>
+
           <li class="nav-item my-1">
             <a href="admin/adminpanel.php" class="nav-link active btn btn-danger">Admin</a>
           </li>
@@ -137,5 +178,9 @@ session_start();
         </div>
     </div>
     <!-- /recently class open -->
+
+    <!-- footer -->
+    <?php include("index_footer.php"); ?>
+    <!-- footer -->
 </body>
 </html>

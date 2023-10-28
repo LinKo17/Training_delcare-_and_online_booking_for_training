@@ -3,7 +3,7 @@ namespace Helper;
 
 class Auth{
     static function check(){
-        session_start();
+        // session_start();
         if(isset($_SESSION["userInfo"])){
             return $_SESSION["userInfo"];
 
