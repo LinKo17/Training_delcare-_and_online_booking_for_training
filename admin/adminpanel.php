@@ -24,6 +24,19 @@ $allUsersData = $database-> userRoleIdAndRolesId();
 
     <!-- original css link -->
     <link rel="stylesheet" href="style.css">
+
+    <style>
+        @media(max-width:780px){
+            .hide-action-style{
+                display: none;
+            }
+        }
+        @media(max-width:519px){
+            .hide-email-style{
+                display: none;
+            }
+        }
+    </style>
 </head>
 <body>
 
@@ -37,18 +50,18 @@ $allUsersData = $database-> userRoleIdAndRolesId();
         <tr>
             <th>No.</th>
             <th>Name</th>
-            <th>Email</th>
-            <th>Role</th>
-            <th>Action</th>
+            <th class="hide-email-style">Email</th>
+            <th >Role</th>
+            <th class="hide-action-style">Action</th>
         </tr>
 
         <?php foreach($allUsersData as $item): ?>
         <tr>
             <td><?= $item->id ?></td>
             <td><?= $item->username ?></td>
-            <td><?= $item->email ?></td>
+            <td class="hide-email-style"><?= $item->email ?></td>
 
-            <td>
+            <td >
 
                 <?php if($item->role_id == 1) : ?>
 
@@ -75,9 +88,9 @@ $allUsersData = $database-> userRoleIdAndRolesId();
                     </span>
 
                 <?php endif ?>
-        </td>
+            </td>
 
-            <td>
+            <td class="hide-action-style">
 
                 <div class="btn-group">
                     <button class="btn btn-outline-light dropdown btn-sm">

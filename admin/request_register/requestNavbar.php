@@ -19,13 +19,14 @@
       </div>
 
       <div class="offcanvas-body">
-      <ul class="navbar-nav">
+        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+
         <!-- ------------------------------------- -->
         <li class="list-item dropdown">
                     <a class="nav-link  text-dark btn btn-light m-2 dropdown-toggle" data-bs-toggle="dropdown" href="">Home</a>
                     <div class="dropdown-menu">
                         <a href="../adminpanel.php" class="dropdown-item text-center">Admin Panel</a>
-                        <a href="../../index.php" class="dropdown-item text-center">Home</a>
+                        <a href="../../index.php"   class="dropdown-item text-center">Home</a>
                     </div>
                 </li> 
         <!-- ------------------------------------- -->
@@ -48,7 +49,7 @@
         <li class="nav-item dropdown">
                     <a class="nav-link text-light btn btn-secondary m-2  dropdown-toggle" href="" data-bs-toggle="dropdown">Active Classes</a>
                     <div class="dropdown-menu">
-                        <a href="../createclasspost.php" class="dropdown-item text-center">Create Classes</a>
+                        <a href="../createclasspost.php" class="dropdown-item text-center ">Create Classes</a>
                         <a href="../createclassinfo.php" class="dropdown-item text-center">Classes Info</a>
                     </div>
                 </li>        
@@ -60,7 +61,7 @@
                     <a class="nav-link  text-light btn btn-secondary m-2 dropdown-toggle" data-bs-toggle="dropdown" href="">Teachers List</a>
                     <div class="dropdown-menu">
                         <a href="../teachers/teachers_create.php" class="dropdown-item text-center">Insert teacher</a>
-                        <a href="../teachers/teachers_info.php" class="dropdown-item text-center">Teacher info</a>
+                        <a href="../teachers/teachers_info.php"   class="dropdown-item text-center">Teacher info</a>
                     </div>
                 </li>
 
@@ -81,15 +82,14 @@
         <!-- ------------------------------------- -->
         <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle text-light btn btn-danger m-2" href="#" data-bs-toggle="dropdown">Contact</a>
-                    <div class="dropdown-menu text-center">
-                      <a href="" class="dropdown-item">Social Media</a>
-                      <a href="users_msg.php" class="dropdown-item text-center">Users Message</a>
-                      <a href="about_us.php" class="dropdown-item text-center">About us</a>
+                    <div class="dropdown-menu">
+                      <a href="../contact/social_media_link.php" class="dropdown-item text-center">Social Media</a>
+                      <a href="../contact/users_msg.php" class="dropdown-item text-center">Users Message</a>
+                      <a href="../contact/about_us.php" class="dropdown-item text-center">About us</a>
                     </div>
                 </li>         
         <!-- ------------------------------------- -->
-
-      </ul>
+        </ul>
 
       </div>
     </div>

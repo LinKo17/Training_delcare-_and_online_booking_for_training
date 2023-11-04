@@ -1,10 +1,8 @@
 <?php 
 include("vendor/autoload.php");
 use Libs\Database\MySQL;
-use Libs\Database\UserLoginSystem;
+use Libs\Database\StuRegisterForm;
 
-$database = new UserLoginSystem(new MySQL());
-print_r($database-> userRoleIdAndRolesId());
-
-
+$database = new StuRegisterForm(new MySQL());
+print_r($database->takeWaitBtn(1));
 

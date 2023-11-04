@@ -51,13 +51,13 @@ $mediaLink = $mediaDatabase->mediaData();
         margin:5px 0px;
     }
 
-    #address span{
+    #address span a{
         font-size:18px;
         color:white;
         opacity: 0.7;
         cursor: default;
     }
-    #address span:hover{
+    #address span a:hover{
         opacity: 0.9;
         text-decoration: underline;
     }
@@ -107,7 +107,7 @@ $mediaLink = $mediaDatabase->mediaData();
 
         <div class="row">
             <div class="col text-center">
-            <a href="../index.php" class="navbar-brand"><span class="fs-5"><span class="text-warning fs-3">My</span><span style="color:white;">Technology</span></span></a>
+            <a href="" class="navbar-brand"><span class="fs-5"><span class="text-warning fs-3">My</span><span style="color:white;">Technology</span></span></a>
             </div>
         </div>
 
@@ -121,13 +121,13 @@ $mediaLink = $mediaDatabase->mediaData();
 
             <div id="address">
                 <span>
-                    အမှတ် ၂၀၉ | ၄ လွှာ ဗညားဒလလမ်း တာမွေမြို့နယ်။
+                <a href=""><?= $mediaLink->my_address ?></a>
                 </span>
             </div>
 
             <div id="address">
                 <span>
-                    No.209 | 4 floors Banyerdala street Tarmwe Township
+                <a href=""><?= $mediaLink->eng_address ?></a>
                 </span>
             </div>
 
@@ -140,7 +140,7 @@ $mediaLink = $mediaDatabase->mediaData();
                 </div>
 
                 <div id="link">
-                    <a href="teachers/teachers_info.php">Teachers</a>
+                    <a href="teachers_info.php">Teachers</a>
                 </div>
 
                 <div id="link">
@@ -161,19 +161,19 @@ $mediaLink = $mediaDatabase->mediaData();
                 <span id="cus_title">Contact</span>
 
                 <div id="link">
-                    <a href="">+959 237235774</a>
+                    <a href=""><?= $mediaLink->phone_1 ?></a>
                 </div>
 
                 <div id="link">
-                    <a href="">01-328392774</a>
+                    <a href=""><?= $mediaLink->phone_2 ?></a>
                 </div>
 
                 <div id="link">
-                    <a href="">mytechnology@gmail.com</a>
+                    <a href=""><?= $mediaLink->mail ?></a>
                 </div>
                 
                 <div id="link">
-                    <a href="">techforeveryone@gmail.com</a>
+                    <a href=""><?= $mediaLink->mail_2 ?></a>
                 </div>
 
 

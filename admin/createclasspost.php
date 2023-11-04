@@ -57,12 +57,18 @@ $dataTeacherAndCourse = $database->joinTeachersAndCoursesAll();
         form{
             background:#fff;
         }
+        .container-style{
+            width:80%;
+        }
         @media(max-width:600px){
             select{
                 padding:7px;
                 font-size:14px;
                 display:block;
                 width:100%;
+            }
+            .container-style{
+            width:100%;
             }
         }
     </style>
@@ -76,7 +82,7 @@ $dataTeacherAndCourse = $database->joinTeachersAndCoursesAll();
 <!-- navbar section -->
 
     <!-- create classes post form -->
-    <div class="container" style="width:80%">
+    <div class="container" class="container-style">
 
 
     <!-- session section -->

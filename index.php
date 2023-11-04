@@ -7,17 +7,36 @@ use Helper\HTTP;
 use Helper\Auth;
 
 session_start();
-// session_destroy();
+
 
 if(isset($_SESSION["userInfo"])){
   $userData = $_SESSION["userInfo"];
 }
-
+unset($_SESSION["loading"]);
 
 $database = new UsersAnotherTable(new MySQL);
 $data = $database->joinClassPostsAndCoursesLimit();
 // session_start();
 // echo Auth::randomNumber();
+?>
+
+<?php
+use Libs\Database\UsersContentTable;
+$mediaDatabase = new UsersContentTable(new MySQL);
+$titleLink = $mediaDatabase->mediaData();
+// print_r($titleLink);
+
+//------ session unset part
+if(isset($_SESSION["verification_file"])){
+  unset($_SESSION["verification_file"]);
+}
+if(isset($_SESSION["loading_file"])){
+  unset($_SESSION["loading_file"]);
+}
+if(isset($_SESSION["rejection"])){
+  unset($_SESSION["rejection"]);
+}
+//------ session unset part
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -41,6 +60,98 @@ $data = $database->joinClassPostsAndCoursesLimit();
             margin: 0;
             padding: 0;
         }
+        /* ------------ */
+        .warp{
+            width:1000px;
+            margin:20px auto;
+            background-color: black;
+            position: relative;
+            color:white;
+            font-family: Courier;
+            user-select: none;
+        }
+        .box{
+            height:200px;
+            text-align: center;
+        }
+        #box1{
+            background-color: black;
+        }
+        #box2{
+
+            background-color: #013a63;
+            display: none;
+            color:#e7ecef;
+        }
+        #box3{
+          background-color: #03045e;
+          display: none;
+          color: orange;
+        }
+        .action{
+            background-color: transparent;
+            border:none;
+            font-size: 1.5em;
+            position: absolute;
+            top:42%;
+            cursor: pointer;
+        }
+
+        #prev{
+            left:20px;
+        }
+        #next{
+            right:20px;
+        }
+        .font-style-header{
+          font-size:45px;
+          line-height: 100px;
+        }
+        .font-style-text{
+          font-size:30px;
+        }
+        .font-style-quote{
+          font-size:30px;
+          line-height: 200px;
+        }
+        @media(max-width:1007px){
+          .warp{
+            width:700px;
+          }
+        }
+
+        @media(max-width:739px){
+          .warp{
+            width:600px;
+          }
+        }
+
+        @media(max-width:623px){
+          .warp{
+            width:500px;
+          }
+        }
+        
+        @media(max-width:623px){
+          .warp{
+            width:500px;
+          }
+        }
+
+        @media(max-width:519px){
+          .warp{
+            width:400px;
+          }
+          .font-style-quote{
+          font-size:20px;
+          line-height: 200px;
+          }
+        }
+        @media(max-width:407px){
+          .warp{
+            width:377px;
+          }
+        }
     </style>
 </head>
 <body>
@@ -50,7 +161,7 @@ $data = $database->joinClassPostsAndCoursesLimit();
    <nav class="navbar navbar-dark bg-primary">
     <div class="container">
 
-    <a href="" class="navbar-brand"><span class="fs-5"><span class="text-warning fs-3">My</span>Technology</span></a>
+    <a href="index.php" class="navbar-brand"><span class="fs-5"><span class="text-warning fs-3">My</span>Technology</span></a>
 
     <!-- responsive button -->
     <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
@@ -131,12 +242,23 @@ $data = $database->joinClassPostsAndCoursesLimit();
     <!-- view section -->
 
     <!-- open time -->
-    <div class="bg-dark text-center p-4" >
-        <div class="bg-light container p-2" style="border-radius:10px; width:45%;">
+    <div class="warp">
+        <button class="action" id="prev"></button>
+        <button class="action" id="next"></button>
 
-            <h1 class="h4 text-light"><span class="text-dark">Open Date : <span class="text-primary">Monday</span> To <span class="text-success">Sunday</span></span></h1>
+        <div class="box" id=box1>
+            <div class="font-style-header">Open Time</div>
+            <div class="font-style-text"><?= $titleLink->open_time ?></div>
+            <div class="font-style-text"><?= $titleLink->open_date ?></div>
+        </div>
 
-            <h1 class="h5 text-light"><span class="text-dark">Open Time : <span class="text-primary">8:00 AM</span> To <span class="text-success">7:00 PM</span></span></h1>
+        <div class="box" id=box2>
+          <span class="font-style-header">Close Time</span>
+          <div class="font-style-text"><?= $titleLink->close_date ?></div>
+        </div>
+
+        <div class="box" id=box3>
+          <span class="font-style-quote"><?= $titleLink->quote ?></span>
         </div>
     </div>
     <!-- open time -->
@@ -182,5 +304,34 @@ $data = $database->joinClassPostsAndCoursesLimit();
     <!-- footer -->
     <?php include("index_footer.php"); ?>
     <!-- footer -->
+
+    <script>
+        document.querySelector("#prev").onclick = prev;
+        document.querySelector("#next").onclick = next;
+
+        setInterval(next,2000);
+        // clearInterval();
+        //setTimeout();
+        var num =1;
+        function prev(){
+            document.querySelector("#box"+num).style.display = "none";
+            num--;
+            if(num<1){
+                num=3;
+                document.querySelector("#box"+num).style.display = "block";
+            }
+            document.querySelector("#box"+num).style.display = "block";
+        }
+
+        function next(){
+            document.querySelector("#box"+num).style.display = "none";
+            num++;
+            if(num>3){
+                num=1;
+                document.querySelector("#box"+num).style.display = "block";
+            }
+            document.querySelector("#box"+num).style.display = "block";
+        }
+    </script>
 </body>
 </html>

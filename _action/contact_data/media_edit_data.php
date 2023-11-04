@@ -32,38 +32,44 @@ switch($media){
         break;
 
     case "vb":
-        echo $data = $_POST["viber"];
+        echo $data = htmlspecialchars($_POST["viber"]);
         $result = $database->viberEdit(1,$data);
         check($result);
         break;
 
     case "tg":
-        echo $data = $_POST["telegram"];
+        echo $data = htmlspecialchars($_POST["telegram"]);
         $result = $database->telegramEdit(1,$data);
         check($result);
         break;
 
     case "ph1":
-        echo $data = $_POST["phone_1"];
+        echo $data = htmlspecialchars($_POST["phone_1"]);
         $result = $database->phone_1(1,$data);
         check($result);
         break;
 
     case "ph2":
-        echo $data = $_POST["phone_2"];
+        echo $data = htmlspecialchars($_POST["phone_2"]);
         $result = $database->phone_2(1,$data);
         check($result);
         break;
         
     case "ph3":
-        echo $data = $_POST["phone_3"];
+        echo $data = htmlspecialchars($_POST["phone_3"]);
         $result = $database->phone_3(1,$data);
         check($result);
         break;
 
     case "mail";
-        echo $data = $_POST["mail"];
+        echo $data = htmlspecialchars($_POST["mail"]);
         $result = $database->mailEdit(1,$data);
+        check($result);
+        break;            
+
+    case "mail_2";
+        echo $data = htmlspecialchars($_POST["mail_2"]);
+        $result = $database->mailEdit_2(1,$data);
         check($result);
         break;            
 

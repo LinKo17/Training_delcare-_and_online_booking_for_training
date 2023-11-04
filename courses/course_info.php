@@ -108,12 +108,11 @@ $data = $database->takeCourse();
 </div>
 <!-- /showing courses information -->  
    
-
-    <!-- footer -->
-    <div class="mt-5">
-        <?php include("../teachers/extra_footer.php"); ?>
-    </div>
-    <!-- footer -->
+<!-- footer for course -->
+<div style="margin-top:150px;">
+  <?php include("extra_footer_for_course.php")?>
+</div>
+<!-- footer for course -->
     
 </body>
 </html>

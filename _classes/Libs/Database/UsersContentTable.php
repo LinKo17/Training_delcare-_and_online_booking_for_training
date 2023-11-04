@@ -107,12 +107,35 @@ class UsersContentTable{
             "phone_3" => $phone_3,
         ]);
     }
+    
     public function mailEdit($id,$mail){
         $database = $this->db;
         $query = $database->prepare("UPDATE social_media  SET mail=:mail,updated_at=Now() WHERE id=:id");
         return $query->execute([
             "id" => $id,
             "mail" => $mail,
+        ]);
+    }
+
+    public function mailEdit_2($id,$mail_2){
+        $database = $this->db;
+        $query = $database->prepare("UPDATE social_media  SET mail_2=:mail_2,updated_at=Now() WHERE id=:id");
+        return $query->execute([
+            "id" => $id,
+            "mail_2" => $mail_2,
+        ]);
+    }
+
+    public function indexFromEdit($id,$open_section_open_time_close_time,$open_section_open_date,$close_section_close_date,$quote_section,$burmese_address,$eng_address){
+        $statement = $this->db->prepare("UPDATE social_media SET open_time =:open_time,open_date=:open_date,close_date=:close_date,quote =:quote,my_address=:my_address,eng_address=:eng_address,updated_At=Now() WHERE id=:id");
+        return $statement->execute([
+            "id" => $id,
+            "open_time" => $open_section_open_time_close_time,
+            "open_date" => $open_section_open_date,
+            "close_date"=> $close_section_close_date,
+            "quote" => $quote_section,
+            "my_address"=>$burmese_address,
+            "eng_address"=>$eng_address
         ]);
     }
 }

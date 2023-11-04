@@ -137,11 +137,11 @@ $data = $database->takeAboutUsData();
 </div>
 <!-- showing   about us information -->     
 
-    <!-- footer -->
-    <div id="style_footer">
-        <?php include("../teachers/extra_footer.php"); ?>
-    </div>
-    <!-- footer -->
+<!-- footer section -->
+<div style="margin-top:250px;">
+    <?php include("extra_footer_for_others.php")?>
+</div>
+<!-- footer section -->
      
     
     

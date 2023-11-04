@@ -1,9 +1,9 @@
 <!-- awesome icon link -->
-<link rel="stylesheet" href="bs/css/all.min.css">
+<link rel="stylesheet" href="../bs/css/all.min.css">
 
 
 <?php
-include("vendor/autoload.php");
+include("../vendor/autoload.php");
 use Libs\Database\MySQL;
 use Libs\Database\UsersContentTable;
 $mediaDatabase = new UsersContentTable(new MySQL);
@@ -140,19 +140,19 @@ $mediaLink = $mediaDatabase->mediaData();
                 </div>
 
                 <div id="link">
-                    <a href="teachers/teachers_info.php">Teachers</a>
+                    <a href="../teachers/teachers_info.php">Teachers</a>
                 </div>
 
                 <div id="link">
-                    <a href="courses/course_info.php">Courses And Fee</a>
+                    <a href="../courses/course_info.php">Courses And Fee</a>
                 </div>
 
                 <div id="link">
-                        <a href="others/contact_us.php">Contact Us</a>
+                        <a href="contact_us.php">Contact Us</a>
                 </div>
 
                 <div id="link">
-                        <a href="others/about_us.php">About Us</a>
+                        <a href="about_us.php">About Us</a>
                 </div>
             </div>
 

@@ -232,12 +232,13 @@ $mediaLink = $mediaDatabase->mediaData();
         <?php endif ?>
     </div>    
 </div>
-<!-- /showing courses information -->  
+<!-- /showing courses information --> 
+
+<!-- footer section -->
+<div style="margin-top:200px;">
+    <?php include("extra_footer_for_others.php")?>
+</div>
+<!-- footer section -->
     
-    <!-- footer -->
-    <div id="style_footer">
-        <?php include("../teachers/extra_footer.php"); ?>
-    </div>
-    <!-- footer -->
 </body>
 </html>

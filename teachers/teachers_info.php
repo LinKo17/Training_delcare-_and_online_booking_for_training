@@ -9,6 +9,9 @@ use Helper\Auth;
 $database = new UsersTable(new MySQL());
 $data = $database->showTeacherInfo();
 
+session_start();
+$random = Auth::randomNumber();
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -96,11 +99,10 @@ $data = $database->showTeacherInfo();
 <!-- /showing teacher information -->  
     
 
-    <!-- footer -->
-    <div class="mt-5">
-        <?php include("extra_footer.php"); ?>
-    </div>
-    <!-- footer -->
-    
+<!-- footer sectioin -->
+<div class="mt-5">
+    <?php include("extra_footer_teacher.php"); ?>
+</div>
+<!-- footer sectioin -->
 </body>
 </html>

@@ -32,6 +32,14 @@ $dataCourse = $database->takeCourse();
         form{
             background-color: #fff;
         }
+        .container-style{
+            width:80%;
+        }
+        @media(max-width:600px){
+            .container-style{
+                width:100%;
+            }
+        }
     </style>
 </head>
 <body>
@@ -41,7 +49,7 @@ $dataCourse = $database->takeCourse();
 <?php  require_once("teacherNavbar.php") ?>
 <!-- navbar section -->
 
-    <div class="container" style="width:80%">
+    <div class="container" class="container-style">
     <!-- session section -->
     <?php if(isset($_SESSION["teacher_success"])) : ?>
     <div class="alert alert-success alert-dismissible fade show" role="alert">

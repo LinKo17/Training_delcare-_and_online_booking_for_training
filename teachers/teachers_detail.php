@@ -37,7 +37,7 @@ $data = $database->joinTeachersAndCourses($id);
       <!-- navbar section -->
       <div class="navbar navbar-dark navbar-expand bg-primary">
         <div class="container">
-            <a href="" class="navbar-brand"><span class="fs-5"><span class="text-warning fs-3">My</span>Technology</span></a>
+            <a href="index.php" class="navbar-brand"><span class="fs-5"><span class="text-warning fs-3">My</span>Technology</span></a>
             <div class="navbar-nav">
                 <a href="teachers_info.php" class="btn btn-dark nav-link active">Back</a>
             </div>
@@ -49,7 +49,7 @@ $data = $database->joinTeachersAndCourses($id);
         <div class="row">
             <div class="col-lg-5 col-md-12 mt-4 col-12">
                 <div class="">
-                    <img src="../teacherPhotos/<?= $data[0]->teacher_img?>" alt="" style="width:100%; height:500px">
+                    <img src="../teacherPhotos/<?= $data[0]->teacher_img?>" alt="" style="width:100%; height:350px">
                 </div>
             </div>
             <div class="col-lg-7 col-md-12 mt-4 col-12">
@@ -62,5 +62,11 @@ $data = $database->joinTeachersAndCourses($id);
             </div>
         </div>
     </div>
+
+    <!-- footer sectioin -->
+        <div class="mt-5">
+            <?php include("extra_footer_teacher.php"); ?>
+        </div>
+    <!-- footer sectioin -->
 </body>
 </html>
