@@ -2,9 +2,16 @@
 include("../../vendor/autoload.php");
 use Libs\Database\MySQL;
 use Libs\Database\AboutUsAndOthers;
+use Helper\Auth;
 
 $database = new AboutUsAndOthers(new MySQL());
 $data = $database->takeAboutUsData();
+?>
+<?php
+session_start();
+
+//checking user role in here
+Auth::checkUserRole();
 ?>
 <!DOCTYPE html>
 <html lang="en">

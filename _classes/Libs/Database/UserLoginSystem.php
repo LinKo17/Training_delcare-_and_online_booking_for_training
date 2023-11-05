@@ -11,26 +11,39 @@ class UserLoginSystem{
     public $test = "helo";
 
     // sign up function
-    public function insertUserdata($data){
-        $database = $this->db;
-        $query = $database->prepare("INSERT INTO user_login (username,email,password,created_at) VALUES (:username,:email,:password,Now())");
+    // public function insertUserdata($data){
+    //     $database = $this->db;
+    //     $query = $database->prepare("INSERT INTO user_login (username,email,password,created_at) VALUES (:username,:email,:password,Now())");
 
-        $data["password"] = password_hash($data['password'],PASSWORD_DEFAULT);
-        return $query->execute($data);
+    //     $data["password"] = password_hash($data['password'],PASSWORD_DEFAULT);
+    //     return $query->execute($data);
         
+    // }
+
+public function insertUserdata($data) {
+    // Check if the email already exists
+    $statement = $this->db->prepare("SELECT email FROM user_login WHERE email = :email");
+    $statement->execute([
+        "email" => $data["email"]
+    ]);
+    $existingEmail = $statement->fetchColumn();
+
+    if ($existingEmail !== false) {
+        return false; // Email already exists
     }
 
-        // // -------------------unit insert------
-        // $unique = "SELECT * FROM members WHERE email='$email'";
-        // $unique_db = mysqli_query($dbConnect,$unique);
-        // if(mysqli_num_rows($unique_db) > 0){
-        //     echo "already exist" . "<br>";
-        // }else{
-        //     $insert = "INSERT INTO members(name,email,password,created_at,updated_at) VALUES ('$name','$email','$pass',Now(),Now())";
-        //     $insert_db = mysqli_query($dbConnect,$insert);
-        //     return $insert_db;
-        // }
-        // //-------------------unit insert------
+    // Prepare and execute the INSERT statement
+    $query = $this->db->prepare("INSERT INTO user_login (username, email, password, created_at) VALUES (:username, :email, :password, NOW())");
+
+    // Hash the password
+    $data["password"] = password_hash($data['password'], PASSWORD_DEFAULT);
+
+    return $query->execute($data);
+}
+
+
+
+    
 
     // sign in function
     public function findByEmailAndPassword($email,$password){

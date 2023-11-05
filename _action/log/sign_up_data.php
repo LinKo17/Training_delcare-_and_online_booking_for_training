@@ -7,42 +7,48 @@ use Libs\Database\UserLoginSystem;
 require("regular_exp_log.php");
 
 // print_r($_POST);
+session_start();
+$username = checkUser($_POST["username"]) ? $_POST["username"] : false;
+$email = checkEmail($_POST["email"]) ? $_POST["email"] : false;
 
-$username = $_POST["username"];
-$email = $_POST["email"];
+$password =   password($_POST["password"]) ? $_POST["password"] : false;
+$conpassword = password($_POST["confirm-password"]) ? $_POST["confirm-password"] : false;
 
-$password = $_POST["password"];
-$conpassword = $_POST["confirm-password"];
+$user_data=[
+    "username" => htmlspecialchars($_POST["username"]),
+    "email" => htmlspecialchars($_POST["email"]),
+    "password" => htmlspecialchars($_POST["password"]),
+    "conpassword" => htmlspecialchars($_POST["confirm-password"])
+];
 
-if($password == $conpassword){
+if(!$username|| !$email || !$password || !$conpassword){
+
+    if(!$username){
+        $_SESSION["user_name_wrong"] = "* write English and no special charactor";
+    }
+
+    if(!$email){
+        $_SESSION["user_email_wrong"] = "* check your email again";
+    }
     
-    if(username($username)){
-         $checkUser = $username;
-    }else{
-        $_SESSION["name"] = "Check you name again.<br> (Name should be between 6 and 15)!!";
-        HTTP::redirect("/log/sign_up.php");
+    if(!$password){
+        $_SESSION["user_pass_wrong"] = "* password should be between 6 and 15";
     }
 
 
-    if(email($email)){
-         $checkEmail = $email;
-    }else{
-        $_SESSION["email"] = "Check you Email again!!!";
-        HTTP::redirect("/log/sign_up.php");
+    if($password != $conpassword){
+        $_SESSION["not_same_password"] = "* password not equal";
     }
 
+    $_SESSION["user_member_data"] = $user_data;
+    HTTP::redirect("/log/sign_up.php");
+}
 
-    if(password($conpassword)){
-         $checkPassword = $conpassword;
-    }else{
-        $_SESSION["password"] = "Check your password <br>(Password between 6 and 15) !!!";
-        HTTP::redirect("/log/sign_up.php");
-    }
-
+ if(strlen(htmlspecialchars($_POST["password"])) == strlen($_POST["confirm-password"])){
     $data =[
-        "username" => htmlspecialchars($checkUser),
-        "email"=>  htmlspecialchars($checkEmail),
-        "password" =>  htmlspecialchars($checkPassword)
+        "username" => htmlspecialchars($username),
+        "email"=>  htmlspecialchars($email),
+        "password" =>  htmlspecialchars($conpassword)
     ];
 
     $database = new UserLoginSystem(new MySQL());
@@ -54,13 +60,15 @@ if($password == $conpassword){
         $_SESSION["userInfo"] = $result;
         HTTP::redirect("/index.php");
     }else{
-        $_SESSION["neq"] = "Sign Up Fail.Please Check Again";
-         HTTP::redirect("/log/sign_up.php");
+        $_SESSION["user_email_wrong"] = "* check your email again";
+        $_SESSION["user_member_data"] = $user_data;
+        HTTP::redirect("/log/sign_up.php");
     }
     
+ }else{
+    $_SESSION["not_same_password"] = "* password not equal";
+    $_SESSION["user_member_data"] = $user_data;
+    HTTP::redirect("/log/sign_up.php");    
+ }
 
-}else{
-    $_SESSION["neq"] = "password and confirm password aren't equal";
-    HTTP::redirect("/log/sign_up.php");
-}
 

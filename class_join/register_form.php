@@ -62,13 +62,13 @@ unset($_SESSION["button__press"]);
             color:black;
             text-decoration: underline;
         }
-        .form-width{
-            width:450px;
+        .container-width{
+            width:500px;
         }
-        @media(max-width:450px){
-            .form-width{
-            width:370px;
-        } 
+        @media(max-width:500px){
+            .container-width{
+                width:370px;
+            }
         }
     </style>
 </head>
@@ -98,7 +98,7 @@ unset($_SESSION["button__press"]);
 
 
     <!-- join register form -->
-        <div class="container my-3 form-width">
+        <div class="container my-3 container-width">
 
             <div class="card">
                 <div class="card-header  text-white text-center fs-5 bg-primary">Register Here</div>
@@ -116,18 +116,35 @@ unset($_SESSION["button__press"]);
                         </div>
 
                         <div class="my-2">
+
                             <label for="name" class="my-1">Name</label>
-                            <input type="text" class="form-control" name="name" id="name" placeholder="Name" required value="<?=$register_member_data["stu_name"] ?? "" ?>">
+
+                            <input type="text" class="form-control <?php if(isset($_SESSION["name_wrong"])): ?> is-invalid <?php endif ?>" name="name" id="name" placeholder="Name" required value="<?=$register_member_data["stu_name"] ?? "" ?>">
+
+                            <?php if(isset( $_SESSION["name_wrong"])): ?>
+                                <span class="text-danger"><?= isset( $_SESSION["name_wrong"]) ?$_SESSION["name_wrong"] : "" ?></span>
+                            <?php endif  ?>
                         </div>
 
                         <div class="my-2">
+
                             <label for="phone_number" class="my-1">Phone Number</label>
-                            <input type="text" class="form-control" name="ph_num" id="phone_number" placeholder="Phone Number" required value="<?=$register_member_data["stu_phone_number"] ?? "" ?>">
+
+                            <input type="text" class="form-control <?php if(isset($_SESSION["phone_wrong"])): ?> is-invalid <?php endif ?>" name="ph_num" id="phone_number" placeholder="Phone Number" required value="<?=$register_member_data["stu_phone_number"] ?? "" ?>">
+
+                            <?php if(isset( $_SESSION["phone_wrong"])): ?>
+                                <span class="text-danger"><?= isset( $_SESSION["phone_wrong"]) ? $_SESSION["phone_wrong"] : "" ?></span>
+                            <?php endif  ?>
+
                         </div>
 
                         <div class="my-2">
                             <label for="email" class="my-1">Email</label>
-                            <input type="text" class="form-control" name="email" id="email" placeholder="Email" required value="<?=$register_member_data["stu_email"] ?? "" ?>">
+                            <input type="text" class="form-control <?php if(isset($_SESSION["email_wrong"])): ?> is-invalid <?php endif ?>" name="email" id="email" placeholder="Email" required value="<?=$register_member_data["stu_email"] ?? "" ?>">
+
+                            <?php if(isset( $_SESSION["email_wrong"])): ?>
+                                <span class="text-danger"><?= isset( $_SESSION["email_wrong"]) ? $_SESSION["email_wrong"] : "" ?></span>
+                            <?php endif  ?>
                         </div>
 
                         <div class="my-2">
@@ -139,18 +156,18 @@ unset($_SESSION["button__press"]);
                         <div class="my-2">
                             <label for="choice_pay" class="my-1">Choice Payment</label>
                             <select  id="choice_pay" name="pay_system" class="form-control" required>
-                                <option value="K-pay" <?php echo $register_member_data["stu_pay_system"] ?? "" == "K-pay" ? "selected" : "" ?>>K-pay</option>
+                                <option value="K-pay" <?php echo $register_member_data["stu_pay_system"] ?? "" == "K-pay" ? "selected" : "" ?>>KBZ Payment</option>
 
-                                <option <?php echo $register_member_data["stu_pay_system"] ?? "" == "Wave" ? "selected" : "" ?> value="Wave">Wave</option>
+                                <option <?php echo $register_member_data["stu_pay_system"] ?? "" == "Wave Payment" ? "selected" : "" ?> value="Wave">Wave Payment</option>
 
-                                <option <?php echo $register_member_data["stu_pay_system"] ?? "" == "A+" ? "selected" : "" ?> value="A+">A+</option>
+                                <option <?php echo $register_member_data["stu_pay_system"] ?? "" == "A+ Payment" ? "selected" : "" ?> value="A+">A+ Payment</option>
                             </select>
                         </div>
     
-                <div class="my-2">
-                    <label for="pay_photo">Payment Screenshot</label>
-                    <input type="file" class="form-control" name="pay_photo" id="payphoto" required>
-                </div>
+                        <div class="my-2">
+                            <label for="pay_photo">Payment Screenshot</label>
+                            <input type="file" class="form-control" name="pay_photo" id="payphoto" required>
+                        </div>
     
                         <div class="">
                             <div class="text-center">
@@ -158,6 +175,7 @@ unset($_SESSION["button__press"]);
                                 <button type="submit" class="btn btn-primary">Register</button>
                             </div>
                         </div>
+
                     </form>
 
                 </div>
@@ -167,7 +185,7 @@ unset($_SESSION["button__press"]);
     <!-- join register form -->
 
     <!-- notice messages -->
-  <div class="container my-3 form-width">
+  <div class="container my-3 container-width">
         <div class="style-world">
             <span>* website အတွင်း အပ်နှံလျှင် အထက်ဖော်ပြပါငွေပေးချေမှုများဖြင့်ငွေပေးချေနိုင်ပါသည်။</span>
         </div>
@@ -191,10 +209,25 @@ unset($_SESSION["button__press"]);
 
     
 
+    <?php
+        if(isset( $_SESSION["register_member_data"])){
+            unset($_SESSION["register_member_data"]);
+        }
+        if(isset( $_SESSION["name_wrong"])){
+            unset($_SESSION["name_wrong"]);
+        }
+        if(isset( $_SESSION["phone_wrong"])){
+            unset($_SESSION["phone_wrong"]);
+        }
+        if(isset( $_SESSION["email_wrong"])){
+            unset($_SESSION["email_wrong"]);
+        }
+    ?>
 
 
 
 
 
+    
 </body>
 </html>

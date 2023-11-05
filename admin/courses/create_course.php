@@ -1,4 +1,11 @@
-<?php session_start() ?>
+<?php
+include("../../vendor/autoload.php");
+use Helper\Auth;
+ session_start(); 
+
+ //checking user role in here
+Auth::checkUserRole();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

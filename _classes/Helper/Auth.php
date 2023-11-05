@@ -1,6 +1,8 @@
 <?php
 namespace Helper;
 
+use Libs\Database\UserLoginSystem;
+
 class Auth{
     static function check(){
         // session_start();
@@ -21,6 +23,20 @@ class Auth{
             // session_start();
             $_SESSION["checkRandomNumber"] = $random;
             return  $random;
+        }
+    }
+
+    static function checkUserRole(){
+        $role = null;
+        if(isset($_SESSION["userInfo"])){
+            $user_data = $_SESSION["userInfo"];
+            $role = $user_data->role_id;
+        }
+        if($role == 4 || $role == 5){
+            return true;
+        }else{
+            HTTP::redirect("/index.php");
+            // echo "wrong";
         }
     }
 }

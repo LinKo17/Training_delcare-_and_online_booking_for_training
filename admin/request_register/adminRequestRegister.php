@@ -12,6 +12,8 @@ session_start();
 $random =Auth::randomNumber();
 // print_r($req_data);
 
+//checking user role in here
+Auth::checkUserRole();
 $number = 0;
 ?>
 <!DOCTYPE html>

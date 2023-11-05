@@ -1,6 +1,11 @@
 <?php
 include("../../_action/teachers_data/teachers_create_data_info.php");
 // echo $random;
+use Helper\Auth;
+
+//checking user role in here
+Auth::checkUserRole();
+
 ?>
 <!DOCTYPE html>
 <html lang="en">

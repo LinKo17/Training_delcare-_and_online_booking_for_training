@@ -6,6 +6,8 @@ use Helper\Auth;
 session_start();
 $random = Auth::randomNumber();
 
+//checking user role in here
+Auth::checkUserRole();
 
 $database = new UserLoginSystem(new MySQL());
 $allUsersData = $database-> userRoleIdAndRolesId();
@@ -91,6 +93,7 @@ $allUsersData = $database-> userRoleIdAndRolesId();
             </td>
 
             <td class="hide-action-style">
+                <?php if($item->id != 1): ?>
 
                 <div class="btn-group">
                     <button class="btn btn-outline-light dropdown btn-sm">
@@ -108,14 +111,16 @@ $allUsersData = $database-> userRoleIdAndRolesId();
                     </button>
 
                     <?php if($item->ban == 1) :?>
-                    <a href="../_action/usermanagement/unban.php?id=<?=$item->id?>&rd=<?=$random?>" class="btn btn-outline-warning btn-sm">Banned</a>
-                    <?php else : ?>
+                        <a href="../_action/usermanagement/unban.php?id=<?=$item->id?>&rd=<?=$random?>" class="btn btn-outline-warning btn-sm">Banned</a>
+                        <?php else : ?>
                         <a href="../_action/usermanagement/ban.php?id=<?=$item->id?>&rd=<?= $random ?>" class="btn btn-outline-success btn-sm">Active</a>
                     <?php endif ?>
 
                     
                     <a href="../_action/usermanagement/delete_User.php?id=<?= $item->id ?>&rd=<?= $random?>"  class="btn btn-outline-danger btn-sm">Delete</a>
                 </div>
+
+                <?php endif ?>
             </td>
         </tr>
         <?php endforeach ?>

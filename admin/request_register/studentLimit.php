@@ -18,6 +18,9 @@ session_start();
 $random = Auth::randomNumber();
 // echo $random;
 
+//checking user role in here
+Auth::checkUserRole();
+
 
 
 
@@ -36,24 +39,24 @@ $random = Auth::randomNumber();
     <script src="../../bs/js/bootstrap.bundle.min.js" defer> </script>
 
     <style>
-    body{
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
-            margin: 0;
-            padding: 0;
+        body{
+                font-family: Arial, sans-serif;
+                background-color: #f0f0f0;
+                margin: 0;
+                padding: 0;
+            }
+        .style-header{
+            border-radius: 20px;
+            padding:5px 20px;
         }
-    .style-header{
-        border-radius: 20px;
-        padding:5px 20px;
-    }
-    .container-fluid{
-        font-family: monospace;
-    }
-    @media(max-width:480px){
-        .style-date{
-            display: none;
+        .container-fluid{
+            font-family: monospace;
         }
-    }
+        @media(max-width:480px){
+            .style-date{
+                display: none;
+            }
+        }
     </style>
 </head>
 <body>

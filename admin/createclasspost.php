@@ -3,6 +3,7 @@
 include("../vendor/autoload.php");
 use Libs\Database\MySQL;
 use Libs\Database\UsersTable;
+use Helper\Auth;
 $database = new UsersTable(new MySQL);
 $data = $database->showTeacherInfo();
 // print_r($data);
@@ -21,6 +22,11 @@ $dataCourse = $database->takeCourse();
 // join teacher table and course table
 $dataTeacherAndCourse = $database->joinTeachersAndCoursesAll();
 // join teacher table and course table
+?>
+<?php
+session_start();
+//checking user role in here
+Auth::checkUserRole();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -74,7 +80,6 @@ $dataTeacherAndCourse = $database->joinTeachersAndCoursesAll();
     </style>
 </head>
 <body>
-    <?php session_start() ?>
 
 
 <!-- navbar section -->

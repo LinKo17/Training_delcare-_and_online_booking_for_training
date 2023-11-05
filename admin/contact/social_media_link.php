@@ -6,6 +6,8 @@ use Helper\Auth;
 session_start();
 $random = Auth::randomNumber();
 
+//checking user role in here
+Auth::checkUserRole();
 
 
 ?>

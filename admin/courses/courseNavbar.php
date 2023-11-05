@@ -1,3 +1,10 @@
+<?php
+include("../../vendor/autoload.php");
+use Helper\Auth;
+
+//checking user role in here
+Auth::checkUserRole();
+?>    
     <!-- navbar section -->
     <nav class="navbar navbar-dark bg-primary">
     <div class="container">
@@ -40,7 +47,7 @@
                         <a href="../request_register/confirmStudents.php"   class="dropdown-item text-center">Confirm Students</a>
                         <a href="../request_register/studentLimit.php"   class="dropdown-item text-center">Limited Students</a>
 
-                        <a href="../request_register/rejectShow.php"   class="dropdown-item text-center text-danger">Limited Students</a>
+                        <a href="../request_register/rejectShow.php"   class="dropdown-item text-center text-danger">Reject Register</a>
                     </div>
                 </li> 
         <!-- ------------------------------------- -->

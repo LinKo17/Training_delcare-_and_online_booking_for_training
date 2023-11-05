@@ -1,3 +1,9 @@
+<?php
+session_start();
+if(isset($_SESSION["user_member_data"])){
+    $user_member_Data = $_SESSION["user_member_data"];
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -38,73 +44,65 @@
         </div>
     </div>
     <!-- navbar section -->
-
-    <!-- session section -->
-    <?php session_start() ?>
-
-    <div class="container mt-5" id="edit-container">
-    
-        <?php if(isset($_SESSION["neq"])) : ?>
-            <div class="alert alert-danger alert-dismissible fade show mt-1" role="alert">
-                <?= $_SESSION["neq"] ?>
-                <?php unset($_SESSION["neq"]) ?>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        <?php endif ?>   
-
-        <?php if(isset($_SESSION["name"])) : ?>
-            <div class="alert alert-danger alert-dismissible fade show mt-1" role="alert">
-                <?= $_SESSION["name"] ?>
-                <?php unset($_SESSION["name"]) ?>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        <?php endif ?>   
-
-        <?php if(isset($_SESSION["email"])) : ?>
-            <div class="alert alert-danger alert-dismissible fade show mt-1" role="alert">
-                <?= $_SESSION["email"] ?>
-                <?php unset($_SESSION["email"]) ?>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        <?php endif ?>  
-
-        <?php if(isset($_SESSION["password"])) : ?>
-            <div class="alert alert-danger alert-dismissible fade show mt-1" role="alert">
-                <?= $_SESSION["password"] ?>
-                <?php unset($_SESSION["password"]) ?>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        <?php endif ?>    
-    </div>
-    <!-- session section -->  
+ 
 
 
     <!-- register form -->
-    <div class="container " id="edit-container">
+    <div class="container mt-3" id="edit-container">
 
       <div class="card">
       <div class="card-header bg-primary text-light text-center h5">Sign Up Form</div>
 
       <div class="card-body">
         <form action="../_action/log/sign_up_data.php" method="post">
+
           <div class="my-2">
             <label for="username">Username</label>
-            <input type="text" class="form-control mt-1" placeholder="Username" id="username" required name="username">
+            <!-- -------------------------------- -->
+            <input type="text" class="form-control mt-1 <?php if(isset($_SESSION["user_name_wrong"])): ?> is-invalid <?php endif ?>" name="username" id="username" placeholder="Username" required value="<?=$user_member_Data["username"] ?? "" ?>">
+
+            <?php if(isset( $_SESSION["user_name_wrong"])): ?>
+                <span class="text-danger"><?= isset( $_SESSION["user_name_wrong"]) ?$_SESSION["user_name_wrong"] : "" ?></span>
+            <?php endif  ?>
+            <!-- -------------------------------- -->
           </div>
 
           <div class="my-2">
             <label for="email">Email</label>
-            <input type="text" class="form-control mt-1" placeholder="Email" id="email" required name="email">
+
+            <!-- ------------------------------- -->
+              <input type="text" class="form-control mt-1 <?php if(isset($_SESSION["user_email_wrong"])): ?> is-invalid <?php endif ?>" name="email" id="email" placeholder="Email" required value="<?=$user_member_Data["email"] ?? "" ?>">
+
+              <?php if(isset( $_SESSION["user_email_wrong"])): ?>
+                <span class="text-danger"><?= isset( $_SESSION["user_email_wrong"]) ? $_SESSION["user_email_wrong"] : "" ?></span>
+              <?php endif  ?>
+            <!-- ------------------------------- -->
           </div>
   
           <div class="my-2">
             <label for="password">Password</label>
-            <input type="text" class="form-control mt-1" placeholder="Password" id="password" required  name="password">
+
+            <!-- --------------------------------------- -->
+            <input type="text" class="form-control mt-1 <?php if(isset($_SESSION["user_pass_wrong"])): ?> is-invalid <?php endif ?>" name="password" id="password" placeholder="Password" required value="<?=$user_member_Data["password"] ?? "" ?>">
+
+            <?php if(isset( $_SESSION["user_pass_wrong"])): ?>
+              <span class="text-danger"><?= isset( $_SESSION["user_pass_wrong"]) ? $_SESSION["user_pass_wrong"] : "" ?></span>
+            <?php endif  ?>
+            <!-- --------------------------------------- -->
           </div>
   
           <div class="my-2">
             <label for="confirm-password">Confirm Password</label>
-            <input type="text" class="form-control mt-1" placeholder="Confirm Password" id="confirm-password" required name="confirm-password">
+
+            <!-- --------------------------------------- -->
+            <input type="text" class="form-control mt-1 <?php if(isset($_SESSION["not_same_password"])): ?> is-invalid <?php endif ?>" name="confirm-password" id="confirm-password" placeholder="Confirm Password" required value="<?=$user_member_Data["conpassword"] ?? "" ?>">
+
+            <?php if(isset( $_SESSION["not_same_password"])): ?>
+
+              <span class="text-danger"><?= isset( $_SESSION["not_same_password"]) ? $_SESSION["not_same_password"] : "" ?></span>
+
+            <?php endif  ?>
+            <!-- --------------------------------------- -->
           </div>
           
           <div class="my-2">
@@ -124,5 +122,24 @@
       </div>
     </div>
     <!-- /register form -->
+
+    <?php
+        if(isset( $_SESSION["user_member_data"])){
+            unset($_SESSION["user_member_data"]);
+        }
+        if(isset( $_SESSION["user_name_wrong"])){
+            unset($_SESSION["user_name_wrong"]);
+        }
+        if(isset( $_SESSION["user_email_wrong"])){
+            unset($_SESSION["user_email_wrong"]);
+        }
+        if(isset( $_SESSION["user_pass_wrong"])){
+            unset($_SESSION["user_pass_wrong"]);
+        }
+        if(isset( $_SESSION["not_same_password"])){
+            unset($_SESSION["not_same_password"]);
+        }
+
+    ?>
 </body>
 </html>

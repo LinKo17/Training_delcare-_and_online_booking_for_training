@@ -22,7 +22,7 @@ if(!isset($_SESSION["rejection"])){
 
 $database = new StuRegisterForm(new MySQL());
 $rej_reason = $database->rejectReasonTaker($_GET["stu"]);
-print_r($rej_reason);
+// print_r($rej_reason);
 ?>
 <!DOCTYPE html>
 <html lang="en">

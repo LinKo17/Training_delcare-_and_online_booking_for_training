@@ -12,6 +12,8 @@ $data = $database->showTeacherInfo();
 session_start();
 $random = Auth::randomNumber();
 
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -73,36 +75,36 @@ $random = Auth::randomNumber();
     </div>
     <!-- navbar section -->
 
-<!-- showing   teacher information -->
+    <!-- showing   teacher information -->
 
-<div class="container" style="width:100%;"> 
-    <div class="row">
-        <?php foreach($data as $item) : ?>
-            <?php if($item->hide == 0): ?>
-        <div class="col-lg-4  p-2 col-md-6">
-            <div class="border card p-1">
-                <div class="">
-                    <img src="../teacherPhotos/<?= $item->teacher_img?>" alt="" style="width:100%; height:300px;">
-                </div>
-                <h1 class="h5 text-center my-2"><?= $item->teacher_name ?></h1>
-                <div class="card-footer">
-                    <a style="width:32%" href="teachers_detail.php?id=<?= $item->id?>&&rd=<?=$random?>" class="btn btn-secondary float-end">Details</a>
+    <div class="container" style="width:100%;"> 
+        <div class="row">
+            <?php foreach($data as $item) : ?>
+                <?php if($item->hide == 0): ?>
+            <div class="col-lg-4  p-2 col-md-6">
+                <div class="border card p-1">
+                    <div class="">
+                        <img src="../teacherPhotos/<?= $item->teacher_img?>" alt="" style="width:100%; height:300px;">
+                    </div>
+                    <h1 class="h5 text-center my-2"><?= $item->teacher_name ?></h1>
+                    <div class="card-footer">
+                        <a style="width:32%" href="teachers_detail.php?id=<?= $item->id?>&&rd=<?=$random?>" class="btn btn-secondary float-end">Details</a>
+                    </div>
                 </div>
             </div>
+            <?php endif ?>
+            <?php endforeach ?>
+
+
         </div>
-        <?php endif ?>
-        <?php endforeach ?>
-
-
     </div>
-</div>
-<!-- /showing teacher information -->  
+    <!-- /showing teacher information -->  
     
 
-<!-- footer sectioin -->
-<div class="mt-5">
-    <?php include("extra_footer_teacher.php"); ?>
-</div>
-<!-- footer sectioin -->
+    <!-- footer sectioin -->
+    <div class="mt-5">
+        <?php include("extra_footer_teacher.php"); ?>
+    </div>
+    <!-- footer sectioin -->
 </body>
 </html>

@@ -54,7 +54,7 @@ if(isset($_SESSION["rejection"])){
     <link rel="stylesheet" href="style.css">
 
     <style>
-    body {
+      body {
             font-family: Arial, sans-serif;
             background-color: #f0f0f0;
             margin: 0;
@@ -221,9 +221,14 @@ if(isset($_SESSION["rejection"])){
           </div>
           </li>
 
-          <li class="nav-item my-1">
-            <a href="admin/adminpanel.php" class="nav-link active btn btn-danger">Admin</a>
-          </li>
+          <?php if(isset($_SESSION["userInfo"])): ?>
+            <?php if($_SESSION["userInfo"]->role_id == 4 || $_SESSION["userInfo"]->role_id == 5): ?>
+              <li class="nav-item my-1">
+                <a href="admin/adminpanel.php" class="nav-link active btn btn-danger">Admin</a>
+              </li>
+              <?php endif ?>
+          <?php endif ?>
+          
         </ul>
 
       </div>

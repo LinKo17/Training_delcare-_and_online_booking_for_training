@@ -1,8 +1,11 @@
-<?php 
+<?php
 include("vendor/autoload.php");
-use Libs\Database\MySQL;
-use Libs\Database\StuRegisterForm;
 
-$database = new StuRegisterForm(new MySQL());
-print_r($database->takeWaitBtn(1));
+use Libs\Database\MySQL;
+use Libs\Database\UserLoginSystem;
+use Helper\Auth;
+
+session_start();
+$_SESSION["userInfo"];
+Auth::checkUserRole();
 

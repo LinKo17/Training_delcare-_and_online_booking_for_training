@@ -4,9 +4,17 @@ use Libs\Database\MySQL;
 use Libs\Database\UsersTable;
 use Libs\Database\UsersAnotherTable;
 use Helper\HTTP;
+use Helper\Auth;
 $database = new UsersAnotherTable(new MySQL());
 $id = $_GET["id"];
 $data = $database->joinTeachersAndCourses($id);
+?>
+
+<?php
+session_start();
+
+//checking user role in here
+Auth::checkUserRole();
 ?>
 <!DOCTYPE html>
 <html lang="en">

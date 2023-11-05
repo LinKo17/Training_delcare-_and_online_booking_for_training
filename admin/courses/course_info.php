@@ -5,6 +5,9 @@ $data = $result;
 use Helper\Auth;
 session_start();
  $rd = Auth::randomNumber();
+
+//checking user role in here
+Auth::checkUserRole();
 ?>
 <!DOCTYPE html>
 <html lang="en">

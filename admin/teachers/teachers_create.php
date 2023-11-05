@@ -8,6 +8,13 @@ $dataCourse = $database->takeCourse();
 
 // ----------- course table data -----------
 ?>
+<?php 
+session_start();
+use Helper\Auth;
+
+//checking user role in here
+Auth::checkUserRole();
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -43,7 +50,7 @@ $dataCourse = $database->takeCourse();
     </style>
 </head>
 <body>
-    <?php session_start() ?>
+    
     
 <!-- navbar section -->
 <?php  require_once("teacherNavbar.php") ?>

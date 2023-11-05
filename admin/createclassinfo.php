@@ -1,6 +1,10 @@
 <?php
 include("../_action/createclassinfodata.php");
 // echo $random;
+use Helper\Auth;
+
+//checking user role in here
+Auth::checkUserRole();
 ?>
 <!DOCTYPE html>
 <html lang="en">

@@ -1,4 +1,10 @@
-
+<?php
+session_start();
+if(isset($_SESSION["user_sign_in_member_data"])){
+    $user_sign_in_member_Data = $_SESSION["user_sign_in_member_data"];
+    // print_r($user_sign_in_member_Data);
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,22 +18,22 @@
     <script src="../bs/js/bootstrap.bundle.min.js" defer> </script>
 
     <style>
-    body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
-            margin: 0;
-            padding: 0;
+        body {
+                font-family: Arial, sans-serif;
+                background-color: #f0f0f0;
+                margin: 0;
+                padding: 0;
+            }
+        #edit-container{
+          width:400px;
         }
-    #edit-container{
-      width:400px;
-    }
 
-    @media(max-width:420px){
-      #edit-container{
-      width:325px;
-    }
+        @media(max-width:420px){
+          #edit-container{
+          width:325px;
+        }
 
-    }
+        }
     </style>
 </head>
 <body>
@@ -41,21 +47,6 @@
     </div>
     <!-- navbar section -->
 
-        <!-- session section -->
-        <?php session_start() ?>
-
-<div class="container my-2" id="edit-container">
-
-    <?php if(isset($_SESSION["neq"])) : ?>
-        <div class="alert alert-danger alert-dismissible fade show mt-1" role="alert">
-            <?= $_SESSION["neq"] ?>
-            <?php unset($_SESSION["neq"]) ?>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    <?php endif ?>   
-
-</div>
-<!-- session section -->
 
     <!-- register form -->
     <div class="container mt-5" id="edit-container">
@@ -66,16 +57,35 @@
       <div class="card-body">
         <form action="../_action/log/sign_in_data.php" method="post">
 
+
+          <!-- ---------------------------------------------- -->
+
           <div class="my-2">
             <label for="email">Email</label>
-            <input type="text" class="form-control mt-1" placeholder="Email" id="email" required name="email">
+
+            <!-- ------------------------------- -->
+              <input type="text" class="form-control mt-1 <?php if(isset($_SESSION["user_sign_in_email_wrong"])): ?> is-invalid <?php endif ?>" name="email" id="email" placeholder="Email" required value="<?=$user_sign_in_member_Data["email"] ?? "" ?>">
+
+              <?php if(isset( $_SESSION["user_sign_in_email_wrong"])): ?>
+                <span class="text-danger"><?= isset( $_SESSION["user_sign_in_email_wrong"]) ? $_SESSION["user_sign_in_email_wrong"] : "" ?></span>
+              <?php endif  ?>
+            <!-- ------------------------------- -->
           </div>
   
           <div class="my-2">
             <label for="password">Password</label>
-            <input type="text" class="form-control mt-1" placeholder="Password" id="password" required name="password">
+
+            <!-- --------------------------------------- -->
+            <input type="text" class="form-control mt-1 <?php if(isset($_SESSION["user_sign_in_pass_wrong"])): ?> is-invalid <?php endif ?>" name="password" id="password" placeholder="Password" required value="<?=$user_sign_in_member_Data["password"] ?? "" ?>">
+
+            <?php if(isset( $_SESSION["user_sign_in_pass_wrong"])): ?>
+              <span class="text-danger"><?= isset( $_SESSION["user_sign_in_pass_wrong"]) ? $_SESSION["user_sign_in_pass_wrong"] : "" ?></span>
+            <?php endif  ?>
+            <!-- --------------------------------------- -->
           </div>
-  
+
+          <!-- ---------------------------------------------- -->
+
           <div class="my-2">
             <input type="radio" style="opacity:0">
             <div class="float-end">
@@ -93,5 +103,18 @@
       </div>
     </div>
     <!-- /register form -->
+
+    <?php
+        if(isset($_SESSION["user_sign_in_member_data"])){
+          unset($_SESSION["user_sign_in_member_data"]);
+        }   
+        if(isset( $_SESSION["user_sign_in_email_wrong"])){
+            unset($_SESSION["user_sign_in_email_wrong"]);
+        }
+        if(isset( $_SESSION["user_sign_in_pass_wrong"])){
+            unset($_SESSION["user_sign_in_pass_wrong"]);
+        }
+
+    ?>
 </body>
 </html>
