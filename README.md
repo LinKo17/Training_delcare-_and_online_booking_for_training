@@ -54,9 +54,9 @@ localhost/MyProject/Training_delcare _and_online_booking_for_training/
 
 (*** you have to exactly follow the instruction to build 11 database table i gave ***).
 
-click SQL tag and copy and paste step by step
+- click SQL tag and copy and paste step by step
 
-###
+### about_us table
 
 CREATE TABLE about_us (
     id INT(11) PRIMARY KEY AUTO_INCREMENT,
@@ -66,9 +66,8 @@ CREATE TABLE about_us (
     updated_at DATETIME NULL
 );
 
-###
 
-###
+### class_posts table
 
 CREATE TABLE class_posts (
     id INT(11) PRIMARY KEY AUTO_INCREMENT,
@@ -84,9 +83,7 @@ CREATE TABLE class_posts (
     update_at DATETIME NULL
 );
 
-###
-
-###
+### class_registered_students table
 
 CREATE TABLE class_registered_students  (
     id INT(11) PRIMARY KEY AUTO_INCREMENT,
@@ -113,9 +110,7 @@ CREATE TABLE class_registered_students  (
     updated_at DATETIME NOT NULL
 );
 
-###
-
-###
+###  courses table
 
 CREATE TABLE  courses  (
     id INT(11) PRIMARY KEY AUTO_INCREMENT,
@@ -126,9 +121,7 @@ CREATE TABLE  courses  (
     updated_at DATETIME NULL
 );
 
-###
-
-###
+### reject_reasons table
 
 CREATE TABLE reject_reasons  (
     id INT(11) PRIMARY KEY AUTO_INCREMENT,
@@ -146,9 +139,7 @@ CREATE TABLE reject_reasons  (
     updated_at DATETIME NULL
 );
 
-###
-
-###
+### roles table
 
 CREATE TABLE roles  (
     id INT(11) PRIMARY KEY AUTO_INCREMENT,
@@ -157,9 +148,7 @@ CREATE TABLE roles  (
     updated_at DATETIME NOT NULL
 );
 
-###
-
-###
+### social_media table
 
 CREATE TABLE social_media  (
     id INT(11) PRIMARY KEY AUTO_INCREMENT,
@@ -181,9 +170,7 @@ CREATE TABLE social_media  (
     updated_at DATETIME NULL
 );
 
-###
-
-###
+### teachers table
 
 CREATE TABLE  teachers  (
     id INT(11) PRIMARY KEY AUTO_INCREMENT,
@@ -196,9 +183,7 @@ CREATE TABLE  teachers  (
     updated_at DATETIME NULL
 );
 
-###
-
-###
+### user_contents table
 
 CREATE TABLE user_contents  (
     id INT(11) PRIMARY KEY AUTO_INCREMENT,
@@ -209,9 +194,7 @@ CREATE TABLE user_contents  (
     updated_at DATETIME NOT NULL
 );
 
-###
-
-###
+### user_login table
 
 CREATE TABLE user_login  (
     id INT(11) PRIMARY KEY AUTO_INCREMENT,
@@ -225,10 +208,7 @@ CREATE TABLE user_login  (
 );
 
 
-###
-
-
-###
+### wait_btn_not_wait_btns table
 
 CREATE TABLE  wait_btn_not_wait_btns  (
     id INT(11) PRIMARY KEY AUTO_INCREMENT,
@@ -236,8 +216,6 @@ CREATE TABLE  wait_btn_not_wait_btns  (
     created_at DATETIME NOT NULL,
     updated_at DATETIME NOT NULL
 );
-
-###
 
 - after  all these instruction have done , you can use this project .If you want to look admin section follow these instruction .
 
