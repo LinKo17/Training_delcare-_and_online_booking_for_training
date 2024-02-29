@@ -11,7 +11,7 @@ $data = $database->takeAboutUsData();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>About</title>
     <!-- bs ccs link -->
     <link rel="stylesheet" href="../bs/css/bootstrap.min.css">
 
@@ -125,12 +125,7 @@ $data = $database->takeAboutUsData();
 
     <div class="card-header bg-primary text-light h5 text-center">About Us</div>
     <div class="card-body" style="text-indent:50px;">
-        <?php if($data->about_us == ""): ?>
-            <?= "Hellooo Learner" ?>
-        <?php else: ?>
-            <?= $data->about_us ?>
-        <?php endif ?>
-
+            <?= $data->about_us ?? "hello" ?>
     </div>
     </div>        
     </div>    

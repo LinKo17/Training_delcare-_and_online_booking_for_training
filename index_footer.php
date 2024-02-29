@@ -121,13 +121,13 @@ $mediaLink = $mediaDatabase->mediaData();
 
             <div id="address">
                 <span>
-                <a href=""><?= $mediaLink->my_address ?></a>
+                <a href=""><?= $mediaLink->my_address ?? "ရန်ကုန်/မြန်မာ"?></a>
                 </span>
             </div>
 
             <div id="address">
                 <span>
-                <a href=""><?= $mediaLink->eng_address ?></a>
+                <a href=""><?= $mediaLink->eng_address ??  "Yangon/Myanmar"?></a>
                 </span>
             </div>
 
@@ -161,19 +161,19 @@ $mediaLink = $mediaDatabase->mediaData();
                 <span id="cus_title">Contact</span>
 
                 <div id="link">
-                    <a href=""><?= $mediaLink->phone_1 ?></a>
+                    <a href=""><?= $mediaLink->phone_1 ?? "09600700800" ?></a>
                 </div>
 
                 <div id="link">
-                    <a href=""><?= $mediaLink->phone_2 ?></a>
+                    <a href=""><?= $mediaLink->phone_2 ?? "094003000200" ?></a>
                 </div>
 
                 <div id="link">
-                    <a href=""><?= $mediaLink->mail ?></a>
+                    <a href=""><?= $mediaLink->mail ?? "fexample@gmail.com" ?></a>
                 </div>
                 
                 <div id="link">
-                    <a href=""><?= $mediaLink->mail_2 ?></a>
+                    <a href=""><?= $mediaLink->mail_2 ?? "sexample@gmail.com" ?></a>
                 </div>
 
 

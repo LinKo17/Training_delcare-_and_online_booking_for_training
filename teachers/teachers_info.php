@@ -20,7 +20,7 @@ $random = Auth::randomNumber();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Teachers</title>
     <!-- bs ccs link -->
     <link rel="stylesheet" href="../bs/css/bootstrap.min.css">
 
@@ -102,7 +102,7 @@ $random = Auth::randomNumber();
     
 
     <!-- footer sectioin -->
-    <div class="mt-5">
+    <div style="margin-top:300px">
         <?php include("extra_footer_teacher.php"); ?>
     </div>
     <!-- footer sectioin -->

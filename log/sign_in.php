@@ -10,7 +10,7 @@ if(isset($_SESSION["user_sign_in_member_data"])){
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Sign In</title>
     <!-- bs ccs link -->
     <link rel="stylesheet" href="../bs/css/bootstrap.min.css">
 
